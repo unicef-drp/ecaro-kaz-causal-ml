@@ -106,6 +106,7 @@ def main():
 
     # Optimal policy parameters
     opt_policy_method = 'policy tree'
+    # opt_policy_method = 'best_policy_score'
     opt_policy_features_ordered = ['oct_children']
     opt_policy_features_unordered = ['oct_regions']
 

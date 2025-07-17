@@ -1,0 +1,1001 @@
+
+
+
+====================================================================================================
+Modified Causal Forest: Training 
+----------------------------------------------------------------------------------------------------
+
+====================================================================================================
+Common support analysis
+
+Treatment sample     Treatment probabilities in %
+--------------------- Upper limits ----------------
+D =         0          100.00%   95.71%  
+D =         1          100.00%   99.10%  
+--------------------- Lower limits ----------------
+D =         0            0.00%    0.00%  
+D =         1            0.00%    0.00%  
+----------------------------------------------------------------------------------------------------
+First treatment is set to 1 and 0 (ignored) due to additivity.
+----------------------------------------------------------------------------------------------------
+Upper limits used: 100.00%  95.71%
+Lower limits used:   0.00%   0.00%
+----------------------------------------------------------------------------------------------------
+
+----------------------------------------------------------------------------------------------------
+Data investigated for common support: Training - fill mcf with y data
+----------------------------------------------------------------------------------------------------
+Observations deleted:   29 (0.04%)
+----------------------------------------------------------------------------------------------------
+
+Observations kept, by treatment
+                   Obs.  Share in %
+oct_asp_flag                   
+0.0           73253       97.71
+1.0            1718        2.29
+-   -   -   -   -   -   -   -   -   -   -   -   -   -   -   -   -   -   -   -   
+Observations deleted, by treatment
+               Obs.  Share in %
+oct_asp_flag                  
+0.0              4       13.79
+1.0             25       86.21
+
+----------------------------------------------------------------------------------------------------
+Data investigated for common support: Training - build mcf data
+----------------------------------------------------------------------------------------------------
+Observations deleted:   27 (0.04%)
+----------------------------------------------------------------------------------------------------
+
+Observations kept, by treatment
+                   Obs.  Share in %
+oct_asp_flag                   
+0.0           73331       97.81
+1.0            1642        2.19
+-   -   -   -   -   -   -   -   -   -   -   -   -   -   -   -   -   -   -   -   
+Observations deleted, by treatment
+               Obs.  Share in %
+oct_asp_flag                  
+1.0             27       100.0
+
+------------- Statistics by treatment status ------------------
+Number of observations:
+oct_asp_flag        0.0   1.0
+jan_avg_inc_opv  146584  3360
+
+Mean
+oct_asp_flag                   0.0           1.0
+jan_avg_inc_opv      108809.084641  12505.538393
+oct_high_edu_adults       0.320171      0.129464
+oct_children              0.592193      0.988393
+oct_disab_child           0.006290      0.014881
+oct_regions              11.249475     14.884821
+
+====================================================================================================
+Balancing tests (descriptive)
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+
+Comparing treatments  1 and  0
+Variable                          Mean       Std        t-val   p-val (%) Stand.Difference (%)
+jan_avg_inc_opv                -96303.54625 721.29591    133.51     0.00    -56.80
+oct_high_edu_adults              -0.19071   0.00592     32.22     0.00    -46.92
+oct_children                      0.39620   0.00225    176.08     0.00    111.40
+oct_disab_child                   0.00859   0.00210      4.09     0.00      8.40
+oct_regions                       3.63535   0.11596     31.35     0.00     49.52
+====================================================================================================
+Local Centering
+
+----------------------------------------------------------------------------------------------------
+Fit of Ey|x for local centering (Best method: Random Forest). R2 for jan_avg_inc_opv: 44.86% 
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+
+New variable to build trees in RF:  jan_avg_inc_opv_lc
+
+Matched outcomes
+
+Short info on data used:
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+<class 'pandas.core.frame.DataFrame'>
+Index: 37487 entries, 31823 to 4498
+Data columns (total 2 columns):
+ #   Column                  Non-Null Count  Dtype  
+---  ------                  --------------  -----  
+ 0   jan_avg_inc_opv_lc_NN0  37487 non-null  float64
+ 1   jan_avg_inc_opv_lc_NN1  37487 non-null  float64
+dtypes: float64(2)
+memory usage: 878.6 KB
+
+       jan_avg_inc_opv_lc_NN0  jan_avg_inc_opv_lc_NN1
+count            3.748700e+04            37487.000000
+mean            -1.197419e+03            -7073.303162
+std              1.734279e+05            46092.669683
+min             -2.687983e+06          -120801.907667
+25%             -2.028466e+04           -11370.427000
+50%             -1.408267e+03             -217.371100
+75%              7.825888e+03            11673.622333
+max              1.005235e+07            97382.740333
+
+Statistics on matched neighbours of variable used for tree building
+
+----------------------------------------------------------------------------------------------------
+Parameters of estimation to build random forest
+Outcome variable used to build forest: jan_avg_inc_opv_lc
+Features used to build forest:          oct_head_inc oct_avg_inc_opv oct_fam_cnt oct_fam_cat oct_com_re_own oct_children oct_disab_child oct_overdue_debt oct_gov_complaint jul_overdue_debt aug_overdue_debt sep_overdue_debt jul_head_inc oct_high_edu_adults oct_fam_debt oct_payer_opv jul_avg_inc_opv aug_head_inc aug_avg_inc_opv sep_head_inc sep_avg_inc_opv oct_api_level oct_regions_prime oct_employment_prime oct_real_estate_prime oct_fndr_smallbiz_prime
+Variables always included in splitting: 
+Number of replications:     1000
+Splitting rule used:        MSE+MCE criterion
+Penalty used in splitting:  21386683338.906013 Penalty method: MSE of treatment prediction 
+Share of data in subsample for forest building: 0.4120266483620749
+Share of data in subsample for forest evaluation: 0.8240532967241498
+Total number of variables available for splitting: 26  
+# of variables (M) used for split: 8   
+           (# of variables drawn from 1+Poisson(M-1))
+Minimum threshold for using Poisson: 10
+Minimum leaf size:                 4   
+Alpha regularity:                  0.100
+------------------- Estimated trees ----------------------------
+Average # of leaves:                      237.9
+Average size of leaves:                   65.2
+Median size of leaves:                    33.5
+Min size of leaves:                          4
+Max size of leaves:                       4739
+Average # of obs in leaves (single tree): 15446
+----------------------------------------------------------------------------------------------------
+
+Share of merged leaves (w/o all treatments per tree): 22.347%
+Share of leaves w/o all treatments per tree (after merger): 0.104%
+Incomplete leafs will not be considered for weight computation.
+----------------------------------------------------------------------------------------------------
+Size of forest: 30.76 MB
+----------------------------------------------------------------------------------------------------
+
+----------------------------------------------------------------------------------------------------
+Parameters of estimation to build random forest
+Outcome variable used to build forest: jan_avg_inc_opv_lc
+Features used to build forest:          oct_head_inc oct_avg_inc_opv oct_fam_cnt oct_fam_cat oct_com_re_own oct_children oct_disab_child oct_overdue_debt oct_gov_complaint jul_overdue_debt aug_overdue_debt sep_overdue_debt jul_head_inc oct_high_edu_adults oct_fam_debt oct_payer_opv jul_avg_inc_opv aug_head_inc aug_avg_inc_opv sep_head_inc sep_avg_inc_opv oct_api_level oct_regions_prime oct_employment_prime oct_real_estate_prime oct_fndr_smallbiz_prime
+Variables always included in splitting: 
+Number of replications:     1000
+Splitting rule used:        MSE+MCE criterion
+Penalty used in splitting:  17759569497.08464 Penalty method: MSE of treatment prediction 
+Share of data in subsample for forest building: 0.4120266483620749
+Share of data in subsample for forest evaluation: 0.8240532967241498
+Total number of variables available for splitting: 26  
+# of variables (M) used for split: 8   
+           (# of variables drawn from 1+Poisson(M-1))
+Minimum threshold for using Poisson: 10
+Minimum leaf size:                 4   
+Alpha regularity:                  0.100
+------------------- Estimated trees ----------------------------
+Average # of leaves:                      247.6
+Average size of leaves:                   62.6
+Median size of leaves:                    30.0
+Min size of leaves:                          4
+Max size of leaves:                       2962
+Average # of obs in leaves (single tree): 15445
+----------------------------------------------------------------------------------------------------
+
+Share of merged leaves (w/o all treatments per tree): 23.363%
+Share of leaves w/o all treatments per tree (after merger): 0.116%
+Incomplete leafs will not be considered for weight computation.
+----------------------------------------------------------------------------------------------------
+Size of forest: 31.88 MB
+----------------------------------------------------------------------------------------------------
+
+----------------------------------------------------------------------------------------------------
+Parameters of estimation to build random forest
+Outcome variable used to build forest: jan_avg_inc_opv_lc
+Features used to build forest:          oct_head_inc oct_avg_inc_opv oct_fam_cnt oct_fam_cat oct_com_re_own oct_children oct_disab_child oct_overdue_debt oct_gov_complaint jul_overdue_debt aug_overdue_debt sep_overdue_debt jul_head_inc oct_high_edu_adults oct_fam_debt oct_payer_opv jul_avg_inc_opv aug_head_inc aug_avg_inc_opv sep_head_inc sep_avg_inc_opv oct_api_level oct_regions_prime oct_employment_prime oct_real_estate_prime oct_fndr_smallbiz_prime
+Variables always included in splitting: 
+Number of replications:     1000
+Splitting rule used:        MSE+MCE criterion
+Penalty used in splitting:  23452346604.538475 Penalty method: MSE of treatment prediction 
+Share of data in subsample for forest building: 0.4120266483620749
+Share of data in subsample for forest evaluation: 0.8240532967241498
+Total number of variables available for splitting: 26  
+# of variables (M) used for split: 8   
+           (# of variables drawn from 1+Poisson(M-1))
+Minimum threshold for using Poisson: 10
+Minimum leaf size:                 4   
+Alpha regularity:                  0.100
+------------------- Estimated trees ----------------------------
+Average # of leaves:                      259.1
+Average size of leaves:                   59.8
+Median size of leaves:                    29.5
+Min size of leaves:                          4
+Max size of leaves:                       3042
+Average # of obs in leaves (single tree): 15445
+----------------------------------------------------------------------------------------------------
+
+Share of merged leaves (w/o all treatments per tree): 22.764%
+Share of leaves w/o all treatments per tree (after merger): 0.097%
+Incomplete leafs will not be considered for weight computation.
+----------------------------------------------------------------------------------------------------
+Size of forest: 33.32 MB
+----------------------------------------------------------------------------------------------------
+
+----------------------------------------------------------------------------------------------------
+Parameters of estimation to build random forest
+Outcome variable used to build forest: jan_avg_inc_opv_lc
+Features used to build forest:          oct_head_inc oct_avg_inc_opv oct_fam_cnt oct_fam_cat oct_com_re_own oct_children oct_disab_child oct_overdue_debt oct_gov_complaint jul_overdue_debt aug_overdue_debt sep_overdue_debt jul_head_inc oct_high_edu_adults oct_fam_debt oct_payer_opv jul_avg_inc_opv aug_head_inc aug_avg_inc_opv sep_head_inc sep_avg_inc_opv oct_api_level oct_regions_prime oct_employment_prime oct_real_estate_prime oct_fndr_smallbiz_prime
+Variables always included in splitting: 
+Number of replications:     1000
+Splitting rule used:        MSE+MCE criterion
+Penalty used in splitting:  19183332948.51325 Penalty method: MSE of treatment prediction 
+Share of data in subsample for forest building: 0.4120266483620749
+Share of data in subsample for forest evaluation: 0.8240532967241498
+Total number of variables available for splitting: 26  
+# of variables (M) used for split: 8   
+           (# of variables drawn from 1+Poisson(M-1))
+Minimum threshold for using Poisson: 10
+Minimum leaf size:                 4   
+Alpha regularity:                  0.100
+------------------- Estimated trees ----------------------------
+Average # of leaves:                      262.1
+Average size of leaves:                   59.1
+Median size of leaves:                    28.0
+Min size of leaves:                          4
+Max size of leaves:                       4541
+Average # of obs in leaves (single tree): 15445
+----------------------------------------------------------------------------------------------------
+
+Share of merged leaves (w/o all treatments per tree): 23.105%
+Share of leaves w/o all treatments per tree (after merger): 0.097%
+Incomplete leafs will not be considered for weight computation.
+----------------------------------------------------------------------------------------------------
+Size of forest: 33.69 MB
+----------------------------------------------------------------------------------------------------
+
+----------------------------------------------------------------------------------------------------
+Training executed at: 2025-06-24 15:39:40.126585
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+Data preparation and stats I:                    0:00:02.199763
+Feature preselection:                            0:00:00.051172
+Common support:                                  0:00:35.570573
+Local centering (recoding of Y):                 0:00:33.199594
+Training the causal forest:                      0:11:17.929641
+  ... of which is time for variable importance:  0:00:00
+
+Total time training:                             0:12:28.950743
+
+====================================================================================================
+Modified Causal Forest: Prediction
+----------------------------------------------------------------------------------------------------
+
+====================================================================================================
+Common support analysis
+
+----------------------------------------------------------------------------------------------------
+Data investigated for common support: Prediction data
+----------------------------------------------------------------------------------------------------
+Observations deleted:  126 (0.12%)
+----------------------------------------------------------------------------------------------------
+
+Observations kept, by treatment
+                   Obs.  Share in %
+oct_asp_flag                   
+0.0           95488       91.05
+1.0            9386        8.95
+-   -   -   -   -   -   -   -   -   -   -   -   -   -   -   -   -   -   -   -   
+Observations deleted, by treatment
+               Obs.  Share in %
+oct_asp_flag                  
+0.0              2        1.59
+1.0            124       98.41
+
+------------- Statistics by treatment status ------------------
+Number of observations:
+oct_asp_flag    0.0   1.0
+oct_head_inc  95488  9386
+
+Mean
+oct_asp_flag               0.0        1.0
+oct_head_inc          1.000387   0.293203
+oct_avg_inc_opv       1.527354   0.189964
+oct_fam_cnt           3.463943   6.025783
+oct_fam_cat           2.239297   1.683891
+oct_com_re_own        0.028297   0.021521
+oct_children          0.592483   0.988813
+oct_disab_child       0.006325   0.014277
+oct_overdue_debt      0.232176   0.476348
+oct_gov_complaint     0.234239   0.269231
+jul_overdue_debt      0.224615   0.465907
+aug_overdue_debt      0.224321   0.465907
+sep_overdue_debt      0.231516   0.475602
+jul_head_inc          0.978427   0.137119
+oct_high_edu_adults   0.320438   0.131046
+oct_fam_debt          0.981809   0.999254
+oct_payer_opv         0.720677   0.790859
+jul_avg_inc_opv       2.130048   0.624121
+aug_head_inc          0.977233   0.134775
+aug_avg_inc_opv       2.131168   0.505434
+sep_head_inc          0.963828   0.150543
+sep_avg_inc_opv       2.110255   0.744300
+oct_api_level         3.103814   2.694332
+oct_regions          10.954403  15.022374
+oct_employment        1.963608   2.052845
+oct_real_estate       1.559442   0.813339
+oct_fndr_smallbiz     0.449805   0.135841
+
+====================================================================================================
+Balancing tests (descriptive)
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+
+Comparing treatments  1 and  0
+Variable                          Mean       Std        t-val   p-val (%) Stand.Difference (%)
+oct_head_inc                     -0.70718   0.00787     89.90     0.00    -65.09
+oct_avg_inc_opv                  -1.33739   0.00812    164.80     0.00   -100.36
+oct_fam_cnt                       2.56184   0.02355    108.79     0.00    119.68
+oct_fam_cat                      -0.55541   0.00818     67.87     0.00    -64.94
+oct_com_re_own                   -0.00678   0.00159      4.26     0.00     -4.35
+oct_children                      0.39633   0.00193    205.84     0.00    111.54
+oct_disab_child                   0.00795   0.00125      6.36     0.00      7.88
+oct_overdue_debt                  0.24417   0.00533     45.78     0.00     52.80
+oct_gov_complaint                 0.03499   0.00478      7.32     0.00      8.07
+jul_overdue_debt                  0.24129   0.00532     45.33     0.00     52.47
+aug_overdue_debt                  0.24159   0.00532     45.38     0.00     52.54
+sep_overdue_debt                  0.24409   0.00533     45.77     0.00     52.80
+jul_head_inc                     -0.84131   0.00648    129.78     0.00    -80.26
+oct_high_edu_adults              -0.18939   0.00380     49.88     0.00    -46.51
+oct_fam_debt                      0.01744   0.00052     33.80     0.00     18.09
+oct_payer_opv                     0.07018   0.00444     15.80     0.00     16.39
+jul_avg_inc_opv                  -1.50593   0.01017    148.08     0.00    -93.69
+aug_head_inc                     -0.84246   0.00643    130.96     0.00    -80.95
+aug_avg_inc_opv                  -1.62573   0.01022    159.06     0.00   -100.82
+sep_head_inc                     -0.81328   0.00667    121.90     0.00    -77.59
+sep_avg_inc_opv                  -1.36595   0.01016    134.39     0.00    -85.18
+oct_api_level                    -0.40948   0.01440     28.44     0.00    -24.66
+oct_regions                       4.06797   0.07173     56.71     0.00     55.72
+oct_employment                    0.08924   0.00814     10.97     0.00     10.48
+oct_real_estate                  -0.74610   0.01209     61.70     0.00    -59.26
+oct_fndr_smallbiz                -0.31396   0.00518     60.67     0.00    -48.93
+====================================================================================================
+Local Centering
+
+
+====================================================================================================
+Average Treatment Effects Estimation 
+----------------------------------------------------------------------------------------------------
+Potential outcomes
+----------------------------------------------------------------------------------------------------
+Outcome variable: jan_avg_inc_opv_lc    Reference population: All
+Treatment  Potential Outcome  SE of PO       Uncentered Outcome
+0          -1110.012487     584.415033       103290.868982
+1          -9523.411130    1313.050863       94877.470339
+----------------------------------------------------------------------------------------------------
+Treatment effects (ATE, ATETs)
+----------------------------------------------------------------------------------------------------
+Outcome variable: jan_avg_inc_opv_lc   Reference population: All
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+Comparison                Estimate   Standard error t-value   p-value
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+1         vs         0 -8413.398643   1437.234671     5.85    0.000% ****
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+
+----------------------------------------------------------------------------------------------------
+Outcome variable: jan_avg_inc_opv_lc      Reference population: All
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+Group Average Treatment Effects (GATE)
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+Heterogeneity: oct_high_edu_adults Outcome: jan_avg_inc_opv_lc Ref. pop.: All
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+                   GATE                                GATE - ATE
+Comparison      Z      Est         SE  t-val   p-val         Est        SE  t-val   p-val
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+1   vs   0      0 -6536.49204  1182.19903  5.53   0.00%****1876.90660  347.76362  5.40   0.00%****   
+1   vs   0      1 -12720.94266  2240.59055  5.68   0.00%****-4307.54401  798.12520  5.40   0.00%****   
+----------------------------------------------------------------------------------------------------
+Shown values of Z may represent the order of the values (starting with 0) instead of the original values.
+----------------------------------------------------------------------------------------------------
+Weights used for comparison with ATE are not truncated. Therefore, GATEs - ATE may not aggregate to 0.
+----------------------------------------------------------------------------------------------------
+
+----------------------------------------------------------------------------------------------------
+Outcome variable: jan_avg_inc_opv_lc      Reference population: All
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+Group Average Treatment Effects (GATE)
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+Heterogeneity: oct_children Outcome: jan_avg_inc_opv_lc Ref. pop.: All
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+                   GATE                                GATE - ATE
+Comparison      Z      Est         SE  t-val   p-val         Est        SE  t-val   p-val
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+1   vs   0      0 -9068.66016  1583.93532  5.73   0.00%****-655.26152  487.45905  1.34  17.89%       
+1   vs   0      1 -8025.17278  1446.71372  5.55   0.00%****388.22586  288.80719  1.34  17.89%       
+----------------------------------------------------------------------------------------------------
+Shown values of Z may represent the order of the values (starting with 0) instead of the original values.
+----------------------------------------------------------------------------------------------------
+Weights used for comparison with ATE are not truncated. Therefore, GATEs - ATE may not aggregate to 0.
+----------------------------------------------------------------------------------------------------
+
+----------------------------------------------------------------------------------------------------
+Outcome variable: jan_avg_inc_opv_lc      Reference population: All
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+Group Average Treatment Effects (GATE)
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+Heterogeneity: oct_disab_child Outcome: jan_avg_inc_opv_lc Ref. pop.: All
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+                   GATE                                GATE - ATE
+Comparison      Z      Est         SE  t-val   p-val         Est        SE  t-val   p-val
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+1   vs   0      0 -8431.27891  1438.94709  5.86   0.00%****-17.88026    3.69264  4.84   0.00%****   
+1   vs   0      1 -5890.38004  1021.77227  5.76   0.00%****2523.01861  521.05838  4.84   0.00%****   
+----------------------------------------------------------------------------------------------------
+Shown values of Z may represent the order of the values (starting with 0) instead of the original values.
+----------------------------------------------------------------------------------------------------
+Weights used for comparison with ATE are not truncated. Therefore, GATEs - ATE may not aggregate to 0.
+----------------------------------------------------------------------------------------------------
+
+----------------------------------------------------------------------------------------------------
+Outcome variable: jan_avg_inc_opv_lc      Reference population: All
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+Group Average Treatment Effects (GATE)
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+Heterogeneity: oct_regions Outcome: jan_avg_inc_opv_lc Ref. pop.: All
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+                   GATE                                GATE - ATE
+Comparison      Z      Est         SE  t-val   p-val         Est        SE  t-val   p-val
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+1   vs   0      0 -11398.06640  1909.05787  5.97   0.00%****-2984.66775  997.25348  2.99   0.28% ***   
+1   vs   0      1 -11611.45395  2153.82087  5.39   0.00%****-3198.05530  1127.95439  2.84   0.46% ***   
+1   vs   0      2 -11779.52363  2018.12371  5.84   0.00%****-3366.12499  1059.77332  3.18   0.15% ***   
+1   vs   0      3 -5448.62896  967.83510  5.63   0.00%****2964.76968  681.68445  4.35   0.00%****   
+1   vs   0      4 -4802.18838  1295.39483  3.71   0.02%****3611.21027  845.23750  4.27   0.00%****   
+1   vs   0      5 -5397.97454  1460.35954  3.70   0.02%****3015.42410  839.96097  3.59   0.03%****   
+----------------------------------------------------------------------------------------------------
+Shown values of Z may represent the order of the values (starting with 0) instead of the original values.
+----------------------------------------------------------------------------------------------------
+Weights used for comparison with ATE are not truncated. Therefore, GATEs - ATE may not aggregate to 0.
+----------------------------------------------------------------------------------------------------
+
+====================================================================================================
+Descriptives for IATE estimation 
+----------------------------------------------------------------------------------------------------
+Effect: IATE
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+Outcome variable: jan_avg_inc_opv
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+Comparison        Mean       Median           Std    Effect > 0  mean(SE)  sig 10%   sig 5%   sig 1%
+1    vs    0  -7082.53608  -4087.70018   7892.71715  11.72%   3501.35081   52.59%   44.14%   29.05%
+----------------------------------------------------------------------------------------------------
+
+----------------------------------------------------------------------------------------------------
+Weights used for comparison with ATE are not truncated. Therefore, IATEs - ATE may not aggregate to 0.
+----------------------------------------------------------------------------------------------------
+
+Individualized ATE 
+
+Short info on data used:
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+<class 'pandas.core.frame.DataFrame'>
+RangeIndex: 104874 entries, 0 to 104873
+Data columns (total 13 columns):
+ #   Column                             Non-Null Count   Dtype  
+---  ------                             --------------   -----  
+ 0   jan_avg_inc_opv_lc0_pot            104874 non-null  float64
+ 1   jan_avg_inc_opv_lc1_pot            104874 non-null  float64
+ 2   jan_avg_inc_opv_lc0_pot_se         104874 non-null  float64
+ 3   jan_avg_inc_opv_lc1_pot_se         104874 non-null  float64
+ 4   jan_avg_inc_opv_lc1vs0_iate        104874 non-null  float64
+ 5   jan_avg_inc_opv_lc1vs0_iate_se     104874 non-null  float64
+ 6   jan_avg_inc_opv_lc0_un_lc_pot      104874 non-null  float64
+ 7   jan_avg_inc_opv_lc1_un_lc_pot      104874 non-null  float64
+ 8   jan_avg_inc_opv_lc0_pot_eff        104874 non-null  float64
+ 9   jan_avg_inc_opv_lc1_pot_eff        104874 non-null  float64
+ 10  jan_avg_inc_opv_lc1vs0_iate_eff    104874 non-null  float64
+ 11  jan_avg_inc_opv_lc0_un_lc_pot_eff  104874 non-null  float64
+ 12  jan_avg_inc_opv_lc1_un_lc_pot_eff  104874 non-null  float64
+dtypes: float64(13)
+memory usage: 10.4 MB
+
+                                      count           mean            std           min           25%           50%            75%           max
+jan_avg_inc_opv_lc0_pot            104874.0   -1110.015357    2377.676969 -14437.237036  -2501.041279   -951.613670     245.481224  1.534473e+04
+jan_avg_inc_opv_lc1_pot            104874.0   -8192.551437    8179.670279 -40387.549122 -13130.654021  -5107.968184   -2261.633832  1.225497e+04
+jan_avg_inc_opv_lc0_pot_se         104874.0    1657.333452    1021.077559    125.518361    868.512691   1453.584303    2184.484807  8.728514e+03
+jan_avg_inc_opv_lc1_pot_se         104874.0    3004.010960    1686.643616    421.346686   1622.667903   2600.744599    4146.455975  1.017231e+04
+jan_avg_inc_opv_lc1vs0_iate        104874.0   -7082.536080    7892.754782 -37612.648428 -11657.157539  -4087.700185   -1450.161890  1.194140e+04
+jan_avg_inc_opv_lc1vs0_iate_se     104874.0    3501.350810    1843.567178    618.815524   2005.775363   3112.832747    4742.669582  1.122390e+04
+jan_avg_inc_opv_lc0_un_lc_pot      104874.0  103290.866112  181182.252491  -6618.755641   4758.407083  37345.958923  125662.393250  4.132992e+06
+jan_avg_inc_opv_lc1_un_lc_pot      104874.0   96208.330032  176064.372788 -10584.835090   3535.570682  33480.091664  113982.970883  4.117735e+06
+jan_avg_inc_opv_lc0_pot_eff        104874.0   -1392.051996    1763.649708  -9222.473218  -2551.733657  -1229.283973    -197.325077  1.092735e+04
+jan_avg_inc_opv_lc1_pot_eff        104874.0   -7777.538496    5817.640323 -26453.311480 -11903.142379  -6405.793265   -2811.867190  4.425139e+03
+jan_avg_inc_opv_lc1vs0_iate_eff    104874.0   -6385.486500    5490.081569 -28078.869363 -10048.984350  -4797.003402   -2005.660868  6.087620e+03
+jan_avg_inc_opv_lc0_un_lc_pot_eff  104874.0  103008.829473  181055.348481  -5352.520282   4658.392948  37081.925775  125516.460073  4.128455e+06
+jan_avg_inc_opv_lc1_un_lc_pot_eff  104874.0   96623.342973  177609.840222  -9710.606881   2654.008642  32111.783022  115256.499523  4.122110e+06
+
+----------------------------------------------------------------------------------------------------
+Prediction executed at: 2025-06-25 04:33:02.337162
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+Data preparation and stats II:                   0:00:09.916036
+Common support:                                  0:00:03.489866
+Local centering (recoding of Y):                 0:00:04.694203
+Weights:                                         12:14:19.126898
+ATEs:                                            0:05:47.830824
+GATEs:                                           0:03:47.697685
+BGATEs:                                          0:00:00
+CBGATEs:                                         0:00:00
+QIATEs:                                          0:00:00
+IATEs:                                           0:24:26.855916
+Balancing test:                                  0:00:00
+
+Total time prediction:                           12:48:40.036683
+
+Post analysis using relational graphs: Sample randomly reduced from 104874 to 50000 observations.
+
+====================================================================================================
+Post estimation analysis
+ Only effects relative to treatment 0 are investigated.
+
+====================================================================================================
+Correlations of effects with ... in %
+----------------------------------------------------------------------------------------------------
+Effect: jan_avg_inc_opv_lc1vs0_iate
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+jan_avg_inc_opv_lc1vs0_iate  100.00%
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+jan_avg_inc_opv_lc0_un_lc_pot  -66.11%
+jan_avg_inc_opv_lc1_un_lc_pot  -63.54%
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+aug_avg_inc_opv       -77.18%
+sep_avg_inc_opv       -76.04%
+oct_avg_inc_opv       -76.01%
+jul_avg_inc_opv       -71.74%
+aug_head_inc          -64.91%
+sep_head_inc          -64.31%
+oct_api_level         -61.09%
+jul_head_inc          -59.85%
+oct_head_inc          -59.63%
+oct_fam_cat           -51.12%
+oct_employment        -44.94%
+oct_payer_opv         -43.43%
+oct_high_edu_adults   -31.32%
+oct_real_estate       -14.20%
+aug_overdue_debt       11.19%
+jul_overdue_debt       11.21%
+oct_overdue_debt       11.33%
+sep_overdue_debt       11.34%
+oct_regions            27.22%
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+
+====================================================================================================
+K-Means++ clustering (all effects jointly)
+----------------------------------------------------------------------------------------------------
+Number of clusters: 6   Average silhouette score:    0.517
+Number of clusters: 8   Average silhouette score:    0.526
+Number of clusters: 10   Average silhouette score:    0.523
+Number of clusters: 12   Average silhouette score:    0.517
+Number of clusters: 14   Average silhouette score:    0.525
+
+Best value of average silhouette score:    0.526
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+Effects are ordered w.r.t. to the size of the effects for the first outcome and first treatment.
+----------------------------------------------------------------------------------------------------
+Number of observations in the clusters
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+Cluster  0:   4655 
+Cluster  1:   8241 
+Cluster  2:   8919 
+Cluster  3:   9913 
+Cluster  4:  12899 
+Cluster  5:  23981 
+Cluster  6:  28613 
+Cluster  7:   7653 
+----------------------------------------------------------------------------------------------------
+Effects
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+                                        0             1            2             3           4            5           6            7
+jan_avg_inc_opv_lc1vs0_iate -26588.356443 -21094.777135 -16164.58685 -11447.951792 -7128.78713 -3659.056905 -965.147706  2588.567246
+----------------------------------------------------------------------------------------------------
+Potential outcomes
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+                                           0              1              2              3             4             5             6             7
+jan_avg_inc_opv_lc0_un_lc_pot  412356.145788  336507.312403  255103.289832  154589.907087  79392.739135  30710.702859  15426.129036  17011.308509
+jan_avg_inc_opv_lc1_un_lc_pot  385767.789345  315412.535268  238938.702982  143141.955295  72263.952005  27051.645954  14460.981330  19599.875755
+----------------------------------------------------------------------------------------------------
+Covariates
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+                            0         1         2         3          4          5          6          7
+oct_regions          6.335768  7.337095  9.106178  9.959750  10.921777  11.991118  13.238353  14.357638
+oct_employment       2.639957  2.539498  2.565983  2.592454   2.464067   1.676911   1.406179   1.663923
+oct_real_estate      1.700967  1.811673  1.855926  1.706446   1.590511   1.440015   1.273547   1.141513
+oct_fndr_smallbiz    0.411171  0.470453  0.539634  0.543024   0.502054   0.424711   0.334393   0.262642
+oct_head_inc         2.753383  2.418517  2.084875  1.483708   1.001551   0.451024   0.222696   0.276885
+oct_avg_inc_opv      4.245328  3.912753  3.377397  2.407647   1.391271   0.561153   0.272708   0.316739
+oct_fam_cnt          2.865091  3.128382  3.473596  3.889035   4.213893   3.701764   3.629259   4.142297
+oct_fam_cat          2.978947  2.933625  2.907277  2.765157   2.494069   1.949377   1.633873   1.643538
+oct_com_re_own       0.016327  0.020750  0.026124  0.032483   0.028374   0.028773   0.028938   0.028486
+oct_children         0.563265  0.553695  0.627649  0.696762   0.736336   0.598766   0.588614   0.714360
+oct_disab_child      0.003867  0.004247  0.004933  0.005548   0.007520   0.007631   0.008178   0.009408
+oct_overdue_debt     0.143072  0.146948  0.176814  0.238576   0.272347   0.306368   0.266452   0.305501
+oct_gov_complaint    0.037809  0.121102  0.308218  0.306870   0.295759   0.249156   0.234194   0.187900
+jul_overdue_debt     0.143716  0.139546  0.170086  0.232220   0.260873   0.295651   0.261664   0.292826
+aug_overdue_debt     0.143287  0.139910  0.169750  0.232119   0.260330   0.295317   0.261594   0.291781
+sep_overdue_debt     0.143072  0.145735  0.176365  0.238374   0.270796   0.305992   0.265963   0.304064
+jul_head_inc         2.552309  2.334789  2.101469  1.629174   1.045507   0.407448   0.159298   0.115641
+oct_high_edu_adults  0.581740  0.502609  0.474941  0.462625   0.402202   0.252909   0.148080   0.087025
+oct_fam_debt         0.971429  0.968329  0.977127  0.985574   0.988759   0.982778   0.986824   0.991115
+oct_payer_opv        0.999570  0.999393  0.997085  0.993746   0.976045   0.636337   0.422920   0.608258
+jul_avg_inc_opv      4.736627  4.638515  4.299025  3.526985   2.364990   1.023394   0.538287   0.682216
+aug_head_inc         2.847046  2.430288  2.137571  1.618077   1.004652   0.364830   0.133016   0.088723
+aug_avg_inc_opv      5.210311  4.841888  4.385357  3.524362   2.295992   0.938660   0.468179   0.590226
+sep_head_inc         2.898818  2.448732  2.040700  1.534046   0.978215   0.372587   0.140705   0.102705
+sep_avg_inc_opv      5.285714  4.834122  4.222446  3.375164   2.240716   0.978483   0.526858   0.716843
+oct_api_level        4.956606  4.879626  4.760736  4.465248   3.772696   2.579167   1.680600   1.705606
+oct_regions_0        0.244898  0.272418  0.215831  0.193181   0.170013   0.181852   0.117464   0.062198
+oct_regions_2        0.261869  0.247543  0.216953  0.198830   0.174277   0.139569   0.125083   0.140076
+oct_regions_10       0.379377  0.243781  0.224913  0.206597   0.192728   0.120220   0.131793   0.073958
+oct_regions_17       0.083136  0.082514  0.098778  0.134873   0.155749   0.164547   0.199525   0.307722
+oct_regions_19       0.009452  0.073413  0.126584  0.127106   0.146445   0.163755   0.244364   0.214295
+oct_regions_20       0.021267  0.080330  0.116941  0.139413   0.160788   0.230057   0.181771   0.201751
+oct_employment_0     0.000430  0.000485  0.000336  0.001211   0.011784   0.202869   0.149023   0.048216
+oct_employment_1     0.000000  0.000121  0.002579  0.005044   0.012171   0.160794   0.428057   0.343525
+oct_employment_2     0.358754  0.458804  0.427851  0.393826   0.476238   0.392894   0.290637   0.504377
+oct_employment_3     0.640816  0.540590  0.569234  0.599919   0.499806   0.243443   0.132283   0.103881
+oct_real_estate_0    0.384103  0.313190  0.300258  0.341067   0.374603   0.397940   0.470660   0.545146
+oct_real_estate_1    0.016541  0.026817  0.040475  0.038132   0.032871   0.037154   0.039493   0.044427
+oct_real_estate_2    0.275832  0.338066  0.326942  0.334308   0.339096   0.376631   0.310873   0.195610
+oct_real_estate_3    0.172073  0.195365  0.184662  0.159387   0.145128   0.113298   0.109950   0.155756
+oct_real_estate_4    0.140709  0.110181  0.130732  0.113992   0.097449   0.065177   0.062664   0.056710
+oct_real_estate_5    0.010741  0.016382  0.016930  0.013114   0.010854   0.009799   0.006361   0.002352
+oct_fndr_smallbiz_0  0.753813  0.699551  0.661509  0.645213   0.659198   0.706476   0.760144   0.810009
+oct_fndr_smallbiz_1  0.125671  0.179469  0.203722  0.228891   0.234359   0.203161   0.174256   0.139030
+oct_fndr_smallbiz_2  0.076047  0.071957  0.068393  0.063553   0.051632   0.049539   0.036662   0.029270
+oct_fndr_smallbiz_3  0.044468  0.049023  0.066375  0.062342   0.054810   0.040824   0.028938   0.021691
+----------------------------------------------------------------------------------------------------
+====================================================================================================
+Post estimation random forests for jan_avg_inc_opv_lc1vs0_iate
+
+----------------------------------------------------------------------------------------------------
+Tuning values choosen for forest (if any)
+----------------------------------------------------------------------------------------------------
+Dependent variable: j N_min:  2M_Try:  7 Alpha: 0.000|  OOB R2 (in %):  95.9755
+----------------------------------------------------------------------------------------------------
+{'bootstrap': True, 'ccp_alpha': 0.0, 'criterion': 'squared_error', 'max_depth': None, 'max_features': 7, 'max_leaf_nodes': None, 'max_samples': None, 'min_impurity_decrease': 0.0, 'min_samples_leaf': 2, 'min_samples_split': 2, 'min_weight_fraction_leaf': 0, 'monotonic_cst': None, 'n_estimators': 1000, 'n_jobs': 19, 'oob_score': True, 'random_state': 42, 'verbose': 0, 'warm_start': False}
+----------------------------------------------------------------------------------------------------
+jan_avg_inc_opv_lc1vs0_iate: R2(%) OOB:  95.9755
+----------------------------------------------------------------------------------------------------
+
+----------------------------------------------------------------------------------------------------
+Variable importance statistics in %-point of R2 lost when omitting particular variable
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+Unordered variables are included (in RF and VI) as dummies and the variable itself.
+Here, all elements of these variables are jointly tested (in Table under heading of unordered variable).
+oct_avg_inc_opv                                   :  21.22%
+oct_regions                                       :  12.25%
+oct_employment                                    :   9.53%
+oct_gov_complaint                                 :   9.38%
+sep_avg_inc_opv                                   :   6.10%
+oct_real_estate                                   :   4.53%
+oct_api_level                                     :   4.19%
+oct_fam_cnt                                       :   3.74%
+sep_head_inc                                      :   2.89%
+oct_head_inc                                      :   2.72%
+aug_avg_inc_opv                                   :   2.53%
+aug_head_inc                                      :   1.74%
+jul_avg_inc_opv                                   :   1.52%
+oct_high_edu_adults                               :   1.47%
+oct_fam_cat                                       :   1.07%
+oct_fndr_smallbiz                                 :   1.04%
+oct_payer_opv                                     :   0.72%
+jul_head_inc                                      :   0.70%
+jul_overdue_debt                                  :   0.31%
+sep_overdue_debt                                  :   0.31%
+aug_overdue_debt                                  :   0.31%
+oct_overdue_debt                                  :   0.29%
+oct_children                                      :   0.25%
+oct_disab_child                                   :  -0.00%
+oct_com_re_own                                    :  -0.00%
+oct_fam_debt                                      :  -0.00%
+----------------------------------------------------------------------------------------------------
+
+----------------------------------------------------------------------------------------------------
+Tree based evaluation of jan_avg_inc_opv_lc1vs0_iate
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+Out-of-sample fit for standard & honest tree (R squared)
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+Depth     Standard tree      Honest tree
+    2            69.32%           69.33%
+    3            75.09%           75.09%
+    4            77.91%           77.91%
+    5            80.38%           80.38%
+----------------------------------------------------------------------------------------------------
+
+
+----------------------------------------------------------------------------------------------------
+Training executed at: 2025-06-24 15:39:40.126585
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+Data preparation and stats I:                    0:00:02.199763
+Feature preselection:                            0:00:00.051172
+Common support:                                  0:00:35.570573
+Local centering (recoding of Y):                 0:00:33.199594
+Training the causal forest:                      0:11:17.929641
+  ... of which is time for variable importance:  0:00:00
+
+Total time training:                             0:12:28.950743
+
+
+----------------------------------------------------------------------------------------------------
+Prediction executed at: 2025-06-25 04:33:02.337162
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+Data preparation and stats II:                   0:00:09.916036
+Common support:                                  0:00:03.489866
+Local centering (recoding of Y):                 0:00:04.694203
+Weights:                                         12:14:19.126898
+ATEs:                                            0:05:47.830824
+GATEs:                                           0:03:47.697685
+BGATEs:                                          0:00:00
+CBGATEs:                                         0:00:00
+QIATEs:                                          0:00:00
+IATEs:                                           0:24:26.855916
+Balancing test:                                  0:00:00
+
+Total time prediction:                           12:48:40.036683
+
+
+----------------------------------------------------------------------------------------------------
+Analysis of IATE executed at: 2025-06-25 04:41:01.717014
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+Correlational analysis and plots of IATE:        0:00:16.290495
+K-means clustering of IATE:                      0:06:27.777104
+Random forest / tree analysis of IATE:           0:01:14.990031
+
+Total time post estimation analysis:             0:07:59.057631
+
+====================================================================================================
+Modified Causal Forest: Prediction
+----------------------------------------------------------------------------------------------------
+
+====================================================================================================
+Common support analysis
+
+----------------------------------------------------------------------------------------------------
+Data investigated for common support: Prediction data
+----------------------------------------------------------------------------------------------------
+Observations deleted:   47 (0.10%)
+----------------------------------------------------------------------------------------------------
+
+Observations kept, by treatment
+                   Obs.  Share in %
+oct_asp_flag                   
+0.0           40863        90.9
+1.0            4090         9.1
+-   -   -   -   -   -   -   -   -   -   -   -   -   -   -   -   -   -   -   -   
+Observations deleted, by treatment
+               Obs.  Share in %
+oct_asp_flag                  
+1.0             47       100.0
+
+------------- Statistics by treatment status ------------------
+Number of observations:
+oct_asp_flag    0.0   1.0
+oct_head_inc  40863  4090
+
+Mean
+oct_asp_flag               0.0        1.0
+oct_head_inc          0.997333   0.292665
+oct_avg_inc_opv       1.517338   0.195844
+oct_fam_cnt           3.467611   6.004401
+oct_fam_cat           2.237770   1.681418
+oct_com_re_own        0.026895   0.017115
+oct_children          0.591758   0.989242
+oct_disab_child       0.006045   0.011491
+oct_overdue_debt      0.232337   0.457946
+oct_gov_complaint     0.231603   0.257213
+jul_overdue_debt      0.223503   0.451345
+aug_overdue_debt      0.223478   0.451100
+sep_overdue_debt      0.231628   0.456968
+jul_head_inc          0.971808   0.131296
+oct_high_edu_adults   0.319874   0.123716
+oct_fam_debt          0.982086   1.000000
+oct_payer_opv         0.720774   0.781663
+jul_avg_inc_opv       2.126276   0.621027
+aug_head_inc          0.971074   0.126895
+aug_avg_inc_opv       2.130681   0.495599
+sep_head_inc          0.958838   0.137897
+sep_avg_inc_opv       2.108509   0.743765
+oct_api_level         3.095808   2.695110
+oct_regions          10.980594  14.971883
+oct_employment        1.966057   2.029095
+oct_real_estate       1.563493   0.780929
+oct_fndr_smallbiz     0.448743   0.127384
+
+====================================================================================================
+Balancing tests (descriptive)
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+
+Comparing treatments  1 and  0
+Variable                          Mean       Std        t-val   p-val (%) Stand.Difference (%)
+oct_head_inc                     -0.70467   0.01171     60.18     0.00    -65.36
+oct_avg_inc_opv                  -1.32149   0.01236    106.94     0.00    -99.39
+oct_fam_cnt                       2.53679   0.03525     71.97     0.00    118.99
+oct_fam_cat                      -0.55635   0.01219     45.63     0.00    -65.46
+oct_com_re_own                   -0.00978   0.00218      4.49     0.00     -6.67
+oct_children                      0.39748   0.00292    136.22     0.00    111.93
+oct_disab_child                   0.00545   0.00171      3.18     0.14      5.84
+oct_overdue_debt                  0.22561   0.00807     27.97     0.00     48.85
+oct_gov_complaint                 0.02561   0.00715      3.58     0.03      5.96
+jul_overdue_debt                  0.22784   0.00805     28.30     0.00     49.65
+aug_overdue_debt                  0.22762   0.00805     28.28     0.00     49.60
+sep_overdue_debt                  0.22534   0.00806     27.94     0.00     48.81
+jul_head_inc                     -0.84051   0.00952     88.31     0.00    -81.09
+oct_high_edu_adults              -0.19616   0.00564     34.76     0.00    -48.59
+oct_fam_debt                      0.01791   0.01565      1.14    25.24      2.51
+oct_payer_opv                     0.06089   0.00683      8.91     0.00     14.12
+jul_avg_inc_opv                  -1.50525   0.01534     98.14     0.00    -94.03
+aug_head_inc                     -0.84418   0.00940     89.80     0.00    -81.96
+aug_avg_inc_opv                  -1.63508   0.01556    105.11     0.00   -101.53
+sep_head_inc                     -0.82094   0.00973     84.35     0.00    -79.24
+sep_avg_inc_opv                  -1.36474   0.01550     88.07     0.00    -85.14
+oct_api_level                    -0.40070   0.02138     18.74     0.00    -24.31
+oct_regions                       3.99129   0.10963     36.41     0.00     54.54
+oct_employment                    0.06304   0.01240      5.08     0.00      7.40
+oct_real_estate                  -0.78256   0.01812     43.18     0.00    -62.57
+oct_fndr_smallbiz                -0.32136   0.00774     41.51     0.00    -50.45
+====================================================================================================
+Local Centering
+
+
+====================================================================================================
+Average Treatment Effects Estimation 
+----------------------------------------------------------------------------------------------------
+Potential outcomes
+----------------------------------------------------------------------------------------------------
+Outcome variable: jan_avg_inc_opv_lc    Reference population: All
+Treatment  Potential Outcome  SE of PO       Uncentered Outcome
+0          -1101.706582     581.828326       102836.249025
+1          -9440.812110    1304.611388       94497.143497
+----------------------------------------------------------------------------------------------------
+Treatment effects (ATE, ATETs)
+----------------------------------------------------------------------------------------------------
+Outcome variable: jan_avg_inc_opv_lc   Reference population: All
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+Comparison                Estimate   Standard error t-value   p-value
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+1         vs         0 -8339.105528   1428.472987     5.84    0.000% ****
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+
+----------------------------------------------------------------------------------------------------
+Outcome variable: jan_avg_inc_opv_lc      Reference population: All
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+Group Average Treatment Effects (GATE)
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+Heterogeneity: oct_high_edu_adults Outcome: jan_avg_inc_opv_lc Ref. pop.: All
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+                   GATE                                GATE - ATE
+Comparison      Z      Est         SE  t-val   p-val         Est        SE  t-val   p-val
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+1   vs   0      0 -6494.92480  1177.04076  5.52   0.00%****1844.18072  344.42165  5.35   0.00%****   
+1   vs   0      1 -12600.94631  2238.42081  5.63   0.00%****-4261.84078  795.94700  5.35   0.00%****   
+----------------------------------------------------------------------------------------------------
+Shown values of Z may represent the order of the values (starting with 0) instead of the original values.
+----------------------------------------------------------------------------------------------------
+Weights used for comparison with ATE are not truncated. Therefore, GATEs - ATE may not aggregate to 0.
+----------------------------------------------------------------------------------------------------
+
+----------------------------------------------------------------------------------------------------
+Outcome variable: jan_avg_inc_opv_lc      Reference population: All
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+Group Average Treatment Effects (GATE)
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+Heterogeneity: oct_children Outcome: jan_avg_inc_opv_lc Ref. pop.: All
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+                   GATE                                GATE - ATE
+Comparison      Z      Est         SE  t-val   p-val         Est        SE  t-val   p-val
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+1   vs   0      0 -9066.99692  1587.91050  5.71   0.00%****-727.89139  491.61561  1.48  13.87%       
+1   vs   0      1 -7907.79106  1443.12999  5.48   0.00%****431.31447  291.30856  1.48  13.87%       
+----------------------------------------------------------------------------------------------------
+Shown values of Z may represent the order of the values (starting with 0) instead of the original values.
+----------------------------------------------------------------------------------------------------
+Weights used for comparison with ATE are not truncated. Therefore, GATEs - ATE may not aggregate to 0.
+----------------------------------------------------------------------------------------------------
+
+----------------------------------------------------------------------------------------------------
+Outcome variable: jan_avg_inc_opv_lc      Reference population: All
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+Group Average Treatment Effects (GATE)
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+Heterogeneity: oct_disab_child Outcome: jan_avg_inc_opv_lc Ref. pop.: All
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+                   GATE                                GATE - ATE
+Comparison      Z      Est         SE  t-val   p-val         Est        SE  t-val   p-val
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+1   vs   0      0 -8349.11359  1430.09972  5.84   0.00%****-10.00806    2.87605  3.48   0.05%****   
+1   vs   0      1 -6818.86032  1142.23660  5.97   0.00%****1520.24521  436.87987  3.48   0.05%****   
+----------------------------------------------------------------------------------------------------
+Shown values of Z may represent the order of the values (starting with 0) instead of the original values.
+----------------------------------------------------------------------------------------------------
+Weights used for comparison with ATE are not truncated. Therefore, GATEs - ATE may not aggregate to 0.
+----------------------------------------------------------------------------------------------------
+
+----------------------------------------------------------------------------------------------------
+Outcome variable: jan_avg_inc_opv_lc      Reference population: All
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+Group Average Treatment Effects (GATE)
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+Heterogeneity: oct_regions Outcome: jan_avg_inc_opv_lc Ref. pop.: All
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+                   GATE                                GATE - ATE
+Comparison      Z      Est         SE  t-val   p-val         Est        SE  t-val   p-val
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+1   vs   0      0 -11332.64576  1906.97887  5.94   0.00%****-2993.54023  1007.35552  2.97   0.30% ***   
+1   vs   0      1 -11530.43492  2033.68194  5.67   0.00%****-3191.32939  1126.65057  2.83   0.46% ***   
+1   vs   0      2 -11493.15071  1983.23388  5.80   0.00%****-3154.04518  1045.97863  3.02   0.26% ***   
+1   vs   0      3 -5480.69741  964.24931  5.68   0.00%****2858.40812  667.76069  4.28   0.00%****   
+1   vs   0      4 -4838.23676  1294.74238  3.74   0.02%****3500.86877  828.46761  4.23   0.00%****   
+1   vs   0      5 -5387.09828  1466.21851  3.67   0.02%****2952.00725  835.93891  3.53   0.04%****   
+----------------------------------------------------------------------------------------------------
+Shown values of Z may represent the order of the values (starting with 0) instead of the original values.
+----------------------------------------------------------------------------------------------------
+Weights used for comparison with ATE are not truncated. Therefore, GATEs - ATE may not aggregate to 0.
+----------------------------------------------------------------------------------------------------
+
+====================================================================================================
+Descriptives for IATE estimation 
+----------------------------------------------------------------------------------------------------
+Effect: IATE
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+Outcome variable: jan_avg_inc_opv
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+Comparison        Mean       Median           Std    Effect > 0  mean(SE)  sig 10%   sig 5%   sig 1%
+1    vs    0  -7035.22779  -4071.71361   7856.30708  11.78%   3500.07983   52.33%   43.64%   28.55%
+----------------------------------------------------------------------------------------------------
+
+----------------------------------------------------------------------------------------------------
+Weights used for comparison with ATE are not truncated. Therefore, IATEs - ATE may not aggregate to 0.
+----------------------------------------------------------------------------------------------------
+
+Individualized ATE 
+
+Short info on data used:
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+<class 'pandas.core.frame.DataFrame'>
+RangeIndex: 44953 entries, 0 to 44952
+Data columns (total 13 columns):
+ #   Column                             Non-Null Count  Dtype  
+---  ------                             --------------  -----  
+ 0   jan_avg_inc_opv_lc0_pot            44953 non-null  float64
+ 1   jan_avg_inc_opv_lc1_pot            44953 non-null  float64
+ 2   jan_avg_inc_opv_lc0_pot_se         44953 non-null  float64
+ 3   jan_avg_inc_opv_lc1_pot_se         44953 non-null  float64
+ 4   jan_avg_inc_opv_lc1vs0_iate        44953 non-null  float64
+ 5   jan_avg_inc_opv_lc1vs0_iate_se     44953 non-null  float64
+ 6   jan_avg_inc_opv_lc0_un_lc_pot      44953 non-null  float64
+ 7   jan_avg_inc_opv_lc1_un_lc_pot      44953 non-null  float64
+ 8   jan_avg_inc_opv_lc0_pot_eff        44953 non-null  float64
+ 9   jan_avg_inc_opv_lc1_pot_eff        44953 non-null  float64
+ 10  jan_avg_inc_opv_lc1vs0_iate_eff    44953 non-null  float64
+ 11  jan_avg_inc_opv_lc0_un_lc_pot_eff  44953 non-null  float64
+ 12  jan_avg_inc_opv_lc1_un_lc_pot_eff  44953 non-null  float64
+dtypes: float64(13)
+memory usage: 4.5 MB
+
+                                     count           mean            std           min           25%           50%            75%           max
+jan_avg_inc_opv_lc0_pot            44953.0   -1101.710807    2397.310543 -13513.344971  -2493.405325   -929.686572     254.943206  1.643773e+04
+jan_avg_inc_opv_lc1_pot            44953.0   -8136.938600    8131.282248 -37524.085052 -13102.167119  -5086.521278   -2237.659681  1.441588e+04
+jan_avg_inc_opv_lc0_pot_se         44953.0    1658.213800    1023.897999    125.518361    864.062614   1450.767118    2182.833842  8.027785e+03
+jan_avg_inc_opv_lc1_pot_se         44953.0    3001.033512    1680.782803    421.346686   1621.557712   2598.964759    4145.424553  1.017231e+04
+jan_avg_inc_opv_lc1vs0_iate        44953.0   -7035.227793    7856.394463 -37305.375843 -11580.309017  -4071.713612   -1448.179843  1.187524e+04
+jan_avg_inc_opv_lc1vs0_iate_se     44953.0    3500.079826    1838.124940    656.937372   2012.264705   3113.718358    4754.734398  1.122390e+04
+jan_avg_inc_opv_lc0_un_lc_pot      44953.0  102836.244799  179715.048260  -6047.437894   4959.326496  37621.290226  124180.488737  3.579159e+06
+jan_avg_inc_opv_lc1_un_lc_pot      44953.0   95801.017007  174607.787904 -10584.835090   3615.835542  33768.624152  112772.323808  3.547441e+06
+jan_avg_inc_opv_lc0_pot_eff        44953.0   -1389.806677    1775.358600  -8964.226607  -2554.436746  -1225.218902    -191.488902  1.125297e+04
+jan_avg_inc_opv_lc1_pot_eff        44953.0   -7762.164797    5803.783076 -26485.967516 -11877.454216  -6370.815025   -2813.545893  3.662858e+03
+jan_avg_inc_opv_lc1vs0_iate_eff    44953.0   -6372.358120    5471.424921 -28010.266317 -10009.408445  -4801.746548   -2005.660868  6.087620e+03
+jan_avg_inc_opv_lc0_un_lc_pot_eff  44953.0  102548.148930  179574.009160  -5352.520282   4982.643223  37183.390834  123804.654487  3.580238e+06
+jan_avg_inc_opv_lc1_un_lc_pot_eff  44953.0   96175.790810  176122.895723  -9710.606881   3031.829593  32446.733456  114339.389552  3.557026e+06
+
+----------------------------------------------------------------------------------------------------
+Prediction executed at: 2025-06-25 06:04:34.529507
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+Data preparation and stats II:                   0:00:00.517844
+Common support:                                  0:00:06.410172
+Local centering (recoding of Y):                 0:00:04.999856
+Weights:                                         1:17:23.048461
+ATEs:                                            0:02:36.541436
+GATEs:                                           0:01:37.435045
+BGATEs:                                          0:00:00
+CBGATEs:                                         0:00:00
+QIATEs:                                          0:00:00
+IATEs:                                           0:01:43.677958
+Balancing test:                                  0:00:00
+
+Total time prediction:                           1:23:32.812492
