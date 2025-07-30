@@ -2,7 +2,7 @@
 
 This folder contains materials for online and offline lectures on Causal Machine Learning by Prof. Dr. Michael Lechner (University of St. Gallen).
 
-Prof. Dr. Michael Lechner is an author of the python library mcf (Modified Causal Forests). There is an example with data, code and study description of the use case of mcf. mcf can be applied to evaluate the efficiency of different policies.
+Prof. Dr. Michael Lechner is an author of the python library mcf (Modified Causal Forests). There is an example with data, code and study description of the use case of mcf. Modified Causal Forests can be applied to evaluate the efficiency of different policies.
 
 ## Directory Structure
 
