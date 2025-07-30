@@ -1,0 +1,785 @@
+
+====================================================================================================
+Optimal Policy Modul (Training) with policy tree
+----------------------------------------------------------------------------------------------------
+
+int_dict
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+cuda:  False
+parallel_processing:  True
+mp_parallel:  6
+output_no_new_dir:  False
+report:  True
+with_numba:  True
+with_output:  True
+xtr_parallel:  True
+
+gen_dict
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+method:  policy tree
+variable_importance:  True
+output_type:  2
+print_to_file:  True
+print_to_terminal:  True
+with_output:  True
+outpath:  Q:\SEW\Projekte\MLechner\Projekte und Angebote\Unicef\Kasachstan\Workshops\Astana\Wednesday_examples070/examplePT
+outfiletext:  Q:\SEW\Projekte\MLechner\Projekte und Angebote\Unicef\Kasachstan\Workshops\Astana\Wednesday_examples070/examplePT/txtFileWithOutput.txt
+outfilesummary:  Q:\SEW\Projekte\MLechner\Projekte und Angebote\Unicef\Kasachstan\Workshops\Astana\Wednesday_examples070/examplePT/txtFileWithOutput_Summary.txt
+d_values:  0 1 2
+no_of_treat:  3
+
+dc_dict
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+check_perfectcorr:  True
+clean_data:  True
+screen_covariates:  True
+min_dummy_obs:  10
+
+other_dict
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+costs_of_treat:  0 0 0
+costs_of_treat_mult:  1 1 1
+max_shares:  1 1 1
+restricted:  False
+
+rnd_dict
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+shares:  None
+
+var_dict
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+bb_restrict_name:  None
+d_name:  treat
+effect_vs_0:  None
+effect_vs_0_se:  None
+id_name:  None
+polscore_desc_name:  None
+polscore_name:  outcome_lc0_un_lc_pot_eff outcome_lc1_un_lc_pot_eff outcome_lc2_un_lc_pot_eff
+x_ord_name:  x_cont0 x_cont1 x_cont2
+x_unord_name:  None
+vi_x_name:  None
+vi_to_dummy_name:  None
+protected_ord_name:  Not available
+protected_unord_name:  Not available
+material_ord_name:  Not available
+material_unord_name:  Not available
+name_ordered:  Not available
+z_name:  Not available
+x_name_remain:  Not available
+name_unordered:  Not available
+x_balance_name:  Not available
+x_name_always_in:  Not available
+
+var_x_type
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+
+var_x_values
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+
+pt_dict
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+no_of_evalupoints:  100
+depth_tree_1:  3
+depth_tree_2:  3
+depth:  5
+depth_tree_1_adj:  2
+depth_tree_2_adj:  2
+total_depth_adj:  4
+min_leaf_size:  19.9375
+select_values_cat:  False
+enforce_restriction:  False
+eva_cat_mult:  1
+
+
+
+Check for missing and unnecessary variables.
+  No observations deleted
+17   variables deleted:id_mcf treat outcome_lc0_pot outcome_lc1_pot outcome_lc2_pot outcome_lc1vs0_iate outcome_lc2vs0_iate outcome_lc2vs1_iate outcome_lc0_un_lc_pot outcome_lc1_un_lc_pot outcome_lc2_un_lc_pot outcome_lc0_pot_eff outcome_lc1_pot_eff outcome_lc2_pot_eff outcome_lc1vs0_iate_eff outcome_lc2vs0_iate_eff outcome_lc2vs1_iate_eff id_mcfx
+
+
+Short info on data used:
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+<class 'pandas.core.frame.DataFrame'>
+Index: 1595 entries, 0 to 1594
+Data columns (total 6 columns):
+ #   Column                     Non-Null Count  Dtype  
+---  ------                     --------------  -----  
+ 0   outcome_lc0_un_lc_pot_eff  1595 non-null   float64
+ 1   outcome_lc1_un_lc_pot_eff  1595 non-null   float64
+ 2   outcome_lc2_un_lc_pot_eff  1595 non-null   float64
+ 3   x_cont0                    1595 non-null   float64
+ 4   x_cont1                    1595 non-null   float64
+ 5   x_cont2                    1595 non-null   float64
+dtypes: float64(6)
+memory usage: 87.2 KB
+
+                            count      mean       std       min       25%       50%       75%       max
+outcome_lc0_un_lc_pot_eff  1595.0 -0.143761  0.506353 -1.731352 -0.495243 -0.152426  0.210004  1.531735
+outcome_lc1_un_lc_pot_eff  1595.0  0.915639  1.098931 -1.732987  0.062027  0.729577  1.844256  3.915144
+outcome_lc2_un_lc_pot_eff  1595.0  0.961636  1.156633 -2.014994  0.099282  0.764184  1.930423  3.900820
+x_cont0                    1595.0 -0.018371  0.981774 -1.730526 -0.873579 -0.032423  0.824631  1.729987
+x_cont1                    1595.0 -0.006417  1.008200 -1.730171 -0.890978 -0.032710  0.864620  1.725818
+x_cont2                    1595.0 -0.001064  0.998286 -1.730866 -0.872720  0.005259  0.846450  1.731855
+
+----------------------------------------------------------------------------------------------------
+Control variables checked
+
+All control variables have been retained
+
+Creating first level optimal policy tree
+
+Creating second level optimal policy tree. Leaf of first tree: 1
+
+Creating second level optimal policy tree. Leaf of first tree: 2
+
+Creating second level optimal policy tree. Leaf of first tree: 3
+
+Creating second level optimal policy tree. Leaf of first tree: 4
+
+----------------------------------------------------------------------------------------------------
+Leaf information for estimated policy tree 
+
+Depth of 1st tree: 2, depth of 2nd tree: 2, total depth: 4
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+Leaf 00:  x_cont1 <=  -0.937 x_cont0 <=   0.917 x_cont0 <=  -0.090 x_cont0 <=  -0.429 
+Alloc Treatment:   0   Obs:    152  
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+Leaf 01:  x_cont1 <=  -0.937 x_cont0 <=   0.917 x_cont0 <=  -0.090 x_cont0 >   -0.429 
+Alloc Treatment:   1   Obs:     40  
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+Leaf 10:  x_cont1 <=  -0.937 x_cont0 <=   0.917 x_cont0 >   -0.090 x_cont1 <=  -1.523 
+Alloc Treatment:   2   Obs:     25  
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+Leaf 11:  x_cont1 <=  -0.937 x_cont0 <=   0.917 x_cont0 >   -0.090 x_cont1 >   -1.523 
+Alloc Treatment:   0   Obs:     73  
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+Leaf 20:  x_cont1 <=  -0.937 x_cont0 >    0.917 x_cont0 <=   1.325 x_cont0 <=   1.152 
+Alloc Treatment:   2   Obs:     22  
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+Leaf 21:  x_cont1 <=  -0.937 x_cont0 >    0.917 x_cont0 <=   1.325 x_cont0 >    1.152 
+Alloc Treatment:   2   Obs:     20  
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+Leaf 30:  x_cont1 <=  -0.937 x_cont0 >    0.917 x_cont0 >    1.325 x_cont0 <=   1.530 
+Alloc Treatment:   2   Obs:     22  
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+Leaf 31:  x_cont1 <=  -0.937 x_cont0 >    0.917 x_cont0 >    1.325 x_cont0 >    1.530 
+Alloc Treatment:   2   Obs:     21  
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+Leaf 40:  x_cont1 >   -0.937 x_cont1 <=  -0.252 x_cont1 <=  -0.607 x_cont0 <=   0.550 
+Alloc Treatment:   1   Obs:    111  
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+Leaf 41:  x_cont1 >   -0.937 x_cont1 <=  -0.252 x_cont1 <=  -0.607 x_cont0 >    0.550 
+Alloc Treatment:   2   Obs:     48  
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+Leaf 50:  x_cont1 >   -0.937 x_cont1 <=  -0.252 x_cont1 >   -0.607 x_cont2 <=   0.743 
+Alloc Treatment:   1   Obs:    126  
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+Leaf 51:  x_cont1 >   -0.937 x_cont1 <=  -0.252 x_cont1 >   -0.607 x_cont2 >    0.743 
+Alloc Treatment:   2   Obs:     50  
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+Leaf 60:  x_cont1 >   -0.937 x_cont1 >   -0.252 x_cont2 <=  -0.888 x_cont0 <=   0.629 
+Alloc Treatment:   2   Obs:    153  
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+Leaf 61:  x_cont1 >   -0.937 x_cont1 >   -0.252 x_cont2 <=  -0.888 x_cont0 >    0.629 
+Alloc Treatment:   1   Obs:     67  
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+Leaf 70:  x_cont1 >   -0.937 x_cont1 >   -0.252 x_cont2 >   -0.888 x_cont2 <=  -0.823 
+Alloc Treatment:   1   Obs:     21  
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+Leaf 71:  x_cont1 >   -0.937 x_cont1 >   -0.252 x_cont2 >   -0.888 x_cont2 >   -0.823 
+Alloc Treatment:   2   Obs:    644  
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+NOTE: Splitpoints displayed for ordered variables are midpoints between observable values (e.g., 0.5 for a variable with values of 0 and 1).
+
+----------------------------------------------------------------------------------------------------
+policy tree          Training  executed at: 2024-09-24 10:35:52.323921
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+Time for policy tree          training:     0:00:16.874079
+
+====================================================================================================
+Optimal Policy Modul (Evaluation) with policy tree
+----------------------------------------------------------------------------------------------------
+
+int_dict
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+cuda:  False
+parallel_processing:  True
+mp_parallel:  6
+output_no_new_dir:  False
+report:  True
+with_numba:  True
+with_output:  True
+xtr_parallel:  True
+
+gen_dict
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+method:  policy tree
+variable_importance:  True
+output_type:  2
+print_to_file:  True
+print_to_terminal:  True
+with_output:  True
+outpath:  Q:\SEW\Projekte\MLechner\Projekte und Angebote\Unicef\Kasachstan\Workshops\Astana\Wednesday_examples070/examplePT
+outfiletext:  Q:\SEW\Projekte\MLechner\Projekte und Angebote\Unicef\Kasachstan\Workshops\Astana\Wednesday_examples070/examplePT/txtFileWithOutput.txt
+outfilesummary:  Q:\SEW\Projekte\MLechner\Projekte und Angebote\Unicef\Kasachstan\Workshops\Astana\Wednesday_examples070/examplePT/txtFileWithOutput_Summary.txt
+d_values:  0 1 2
+no_of_treat:  3
+x_cont_flag:  True
+x_ord_flag:  False
+x_unord_flag:  False
+
+dc_dict
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+check_perfectcorr:  True
+clean_data:  True
+screen_covariates:  True
+min_dummy_obs:  10
+
+other_dict
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+costs_of_treat:  0 0 0
+costs_of_treat_mult:  1 1 1
+max_shares:  1 1 1
+restricted:  False
+max_by_treat:  [1595 1595 1595]
+
+rnd_dict
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+shares:  None
+
+var_dict
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+bb_restrict_name:  None
+d_name:  treat
+effect_vs_0:  None
+effect_vs_0_se:  None
+id_name:  id_mcfx
+polscore_desc_name:  None
+polscore_name:  outcome_lc0_un_lc_pot_eff outcome_lc1_un_lc_pot_eff outcome_lc2_un_lc_pot_eff
+x_ord_name:  x_cont0 x_cont1 x_cont2
+x_unord_name:  Not available
+vi_x_name:  None
+vi_to_dummy_name:  None
+protected_ord_name:  Not available
+protected_unord_name:  Not available
+material_ord_name:  Not available
+material_unord_name:  Not available
+name_ordered:  Not available
+z_name:  Not available
+x_name_remain:  Not available
+name_unordered:  Not available
+x_balance_name:  Not available
+x_name_always_in:  Not available
+x_name:  x_cont0 x_cont1 x_cont2
+
+var_x_type
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+x_cont0:  cont
+x_cont1:  cont
+x_cont2:  cont
+
+var_x_values
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+x_cont0:  -1.7305261476141034  ...  1.729986726245877
+x_cont1:  -1.7301707100645  ...  1.7258180098640734
+x_cont2:  -1.7308655489663822  ...  1.7318548916222118
+
+pt_dict
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+no_of_evalupoints:  100
+depth_tree_1:  3
+depth_tree_2:  3
+depth:  5
+depth_tree_1_adj:  2
+depth_tree_2_adj:  2
+total_depth_adj:  4
+min_leaf_size:  19.9375
+select_values_cat:  False
+enforce_restriction:  False
+eva_cat_mult:  1
+cost_of_treat_restrict:  [0 0 0]
+policy_tree:  [52787, None, 91753, 75205, 0, 'x_cont1', 'cont', np.float64(-0.9368279340076772), None] [91753, 52787, 39698, 90580, 0, 'x_cont0', 'cont', np.float64(0.9171925047491625), [0, 2]] [75205, 52787, 48009, 71369, 0, 'x_cont1', 'cont', np.float64(-0.2524660717781464), [1, 2]] [39698, 91753, 888, 41562, 0, 'x_cont0', 'cont', np.float64(-0.09035907839103019), None] [888, 39698, None, None, 1, 'x_cont0', 'cont', np.float64(-0.42855939329803583), [0, 1]] [41562, 39698, None, None, 1, 'x_cont1', 'cont', np.float64(-1.523206529574775), [2, 0]] [90580, 91753, 67974, 13655, 0, 'x_cont0', 'cont', np.float64(1.324769849429892), None] [67974, 90580, None, None, 1, 'x_cont0', 'cont', np.float64(1.1515565497870788), [2, 2]] [13655, 90580, None, None, 1, 'x_cont0', 'cont', np.float64(1.530464620897212), [2, 2]] [48009, 75205, 1045, 86224, 0, 'x_cont1', 'cont', np.float64(-0.6070177249998159), None] [1045, 48009, None, None, 1, 'x_cont0', 'cont', np.float64(0.5497888663618484), [1, 2]] [86224, 48009, None, None, 1, 'x_cont2', 'cont', np.float64(0.7430475522293332), [1, 2]] [71369, 75205, 78018, 4535, 0, 'x_cont2', 'cont', np.float64(-0.8881615154269522), None] [78018, 71369, None, None, 1, 'x_cont0', 'cont', np.float64(0.6288408398763501), [2, 1]] [4535, 71369, None, None, 1, 'x_cont2', 'cont', np.float64(-0.8234866651197905), [1, 2]]
+
+
+
+====================================================================================================
+Evaluating allocation of policy tree with Training PT data
+----------------------------------------------------------------------------------------------------
+
+----------------------------------------------------------------------------------------------------
+Mean of variables / treatment shares      outcome_lc0_un_lc_pot_effalloc       0       1       2
+All Policy Tree                              1.0498        14.11%  22.88%  63.01%
+All observed                                 0.5271        33.54%  33.54%  32.92%
+All random                                   0.5974        31.79%  34.86%  33.35%
+Switchers Policy Tree                        1.0999        13.92%  22.51%  63.56%
+Switchers random                             0.6573        31.72%  34.28%  34.00%
+----------------------------------------------------------------------------------------------------
+
+----------------------------------------------------------------------------------------------------
+Descriptive statistics of features for Policy Tree
+----------------------------------------------------------------------------------------------------
+
+------------- Statistics by treatment status ------------------
+Number of observations:
+Policy Tree    0    1     2
+x_cont0      225  365  1005
+
+Mean
+Policy Tree         0         1         2
+x_cont0     -0.553834  0.028119  0.084623
+x_cont1     -1.272844 -0.355755  0.403985
+x_cont2     -0.016409 -0.485478  0.178303
+
+----------------------------------------------------------------------------------------------------
+Descriptive statistics of features for observed
+----------------------------------------------------------------------------------------------------
+
+------------- Statistics by treatment status ------------------
+Number of observations:
+observed    0    1    2
+x_cont0   535  535  525
+
+Mean
+observed         0         1         2
+x_cont0   0.055182 -0.009422 -0.102446
+x_cont1   0.098317  0.077329 -0.198488
+x_cont2   0.126972 -0.055543 -0.076023
+
+----------------------------------------------------------------------------------------------------
+Descriptive statistics of features for random
+----------------------------------------------------------------------------------------------------
+
+------------- Statistics by treatment status ------------------
+Number of observations:
+random     0    1    2
+x_cont0  507  556  532
+
+Mean
+random          0         1         2
+x_cont0 -0.007977 -0.065938  0.021435
+x_cont1 -0.010191 -0.010428  0.001371
+x_cont2  0.028602 -0.022565 -0.006866
+
+----------------------------------------------------------------------------------------------------
+Descriptive statistics of features for Policy Tree for switchers
+----------------------------------------------------------------------------------------------------
+
+------------- Statistics by treatment status ------------------
+Number of observations:
+Policy Tree    0    1    2
+x_cont0      154  249  703
+
+Mean
+Policy Tree         0         1         2
+x_cont0     -0.559462  0.011808  0.107150
+x_cont1     -1.266727 -0.382951  0.484420
+x_cont2     -0.051115 -0.497784  0.210916
+
+----------------------------------------------------------------------------------------------------
+Descriptive statistics of features for random for switchers
+----------------------------------------------------------------------------------------------------
+
+------------- Statistics by treatment status ------------------
+Number of observations:
+random     0    1    2
+x_cont0  334  361  358
+
+Mean
+random          0         1         2
+x_cont0  0.037075 -0.046329  0.092593
+x_cont1 -0.060567 -0.044254  0.132103
+x_cont2 -0.004138  0.025615  0.076940
+
+----------------------------------------------------------------------------------------------------
+Evaluation of Training PT data with policy tree executed at: 2024-09-24 10:35:58.472043
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+Time for Evaluation Training PT data:      0:00:06.057864
+
+====================================================================================================
+Optimal Policy Modul (Allocation) with policy tree
+----------------------------------------------------------------------------------------------------
+
+int_dict
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+cuda:  False
+parallel_processing:  True
+mp_parallel:  6
+output_no_new_dir:  False
+report:  True
+with_numba:  True
+with_output:  True
+xtr_parallel:  True
+
+gen_dict
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+method:  policy tree
+variable_importance:  False
+output_type:  2
+print_to_file:  True
+print_to_terminal:  True
+with_output:  True
+outpath:  Q:\SEW\Projekte\MLechner\Projekte und Angebote\Unicef\Kasachstan\Workshops\Astana\Wednesday_examples070/examplePT
+outfiletext:  Q:\SEW\Projekte\MLechner\Projekte und Angebote\Unicef\Kasachstan\Workshops\Astana\Wednesday_examples070/examplePT/txtFileWithOutput.txt
+outfilesummary:  Q:\SEW\Projekte\MLechner\Projekte und Angebote\Unicef\Kasachstan\Workshops\Astana\Wednesday_examples070/examplePT/txtFileWithOutput_Summary.txt
+d_values:  0 1 2
+no_of_treat:  3
+x_cont_flag:  True
+x_ord_flag:  False
+x_unord_flag:  False
+
+dc_dict
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+check_perfectcorr:  True
+clean_data:  True
+screen_covariates:  True
+min_dummy_obs:  10
+
+other_dict
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+costs_of_treat:  0 0 0
+costs_of_treat_mult:  1 1 1
+max_shares:  1 1 1
+restricted:  False
+max_by_treat:  [1595 1595 1595]
+
+rnd_dict
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+shares:  0.335423197492163 0.335423197492163 0.329153605015674
+
+var_dict
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+bb_restrict_name:  None
+d_name:  treat
+effect_vs_0:  None
+effect_vs_0_se:  None
+id_name:  id_mcfx
+polscore_desc_name:  None
+polscore_name:  outcome_lc0_un_lc_pot_eff outcome_lc1_un_lc_pot_eff outcome_lc2_un_lc_pot_eff
+x_ord_name:  x_cont0 x_cont1 x_cont2
+x_unord_name:  Not available
+vi_x_name:  None
+vi_to_dummy_name:  None
+protected_ord_name:  Not available
+protected_unord_name:  Not available
+material_ord_name:  Not available
+material_unord_name:  Not available
+name_ordered:  Not available
+z_name:  Not available
+x_name_remain:  Not available
+name_unordered:  Not available
+x_balance_name:  Not available
+x_name_always_in:  Not available
+x_name:  x_cont0 x_cont1 x_cont2
+
+var_x_type
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+x_cont0:  cont
+x_cont1:  cont
+x_cont2:  cont
+
+var_x_values
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+x_cont0:  -1.7305261476141034  ...  1.729986726245877
+x_cont1:  -1.7301707100645  ...  1.7258180098640734
+x_cont2:  -1.7308655489663822  ...  1.7318548916222118
+
+pt_dict
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+no_of_evalupoints:  100
+depth_tree_1:  3
+depth_tree_2:  3
+depth:  5
+depth_tree_1_adj:  2
+depth_tree_2_adj:  2
+total_depth_adj:  4
+min_leaf_size:  19.9375
+select_values_cat:  False
+enforce_restriction:  False
+eva_cat_mult:  1
+cost_of_treat_restrict:  [0 0 0]
+policy_tree:  [52787, None, 91753, 75205, 0, 'x_cont1', 'cont', np.float64(-0.9368279340076772), None] [91753, 52787, 39698, 90580, 0, 'x_cont0', 'cont', np.float64(0.9171925047491625), [0, 2]] [75205, 52787, 48009, 71369, 0, 'x_cont1', 'cont', np.float64(-0.2524660717781464), [1, 2]] [39698, 91753, 888, 41562, 0, 'x_cont0', 'cont', np.float64(-0.09035907839103019), None] [888, 39698, None, None, 1, 'x_cont0', 'cont', np.float64(-0.42855939329803583), [0, 1]] [41562, 39698, None, None, 1, 'x_cont1', 'cont', np.float64(-1.523206529574775), [2, 0]] [90580, 91753, 67974, 13655, 0, 'x_cont0', 'cont', np.float64(1.324769849429892), None] [67974, 90580, None, None, 1, 'x_cont0', 'cont', np.float64(1.1515565497870788), [2, 2]] [13655, 90580, None, None, 1, 'x_cont0', 'cont', np.float64(1.530464620897212), [2, 2]] [48009, 75205, 1045, 86224, 0, 'x_cont1', 'cont', np.float64(-0.6070177249998159), None] [1045, 48009, None, None, 1, 'x_cont0', 'cont', np.float64(0.5497888663618484), [1, 2]] [86224, 48009, None, None, 1, 'x_cont2', 'cont', np.float64(0.7430475522293332), [1, 2]] [71369, 75205, 78018, 4535, 0, 'x_cont2', 'cont', np.float64(-0.8881615154269522), None] [78018, 71369, None, None, 1, 'x_cont0', 'cont', np.float64(0.6288408398763501), [2, 1]] [4535, 71369, None, None, 1, 'x_cont2', 'cont', np.float64(-0.8234866651197905), [1, 2]]
+
+
+
+----------------------------------------------------------------------------------------------------
+Leaf information for estimated policy tree 
+
+Depth of 1st tree: 2, depth of 2nd tree: 2, total depth: 4
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+Leaf 00:  x_cont1 <=  -0.937 x_cont0 <=   0.917 x_cont0 <=  -0.090 x_cont0 <=  -0.429 
+Alloc Treatment:   0   Obs:     70  
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+Leaf 01:  x_cont1 <=  -0.937 x_cont0 <=   0.917 x_cont0 <=  -0.090 x_cont0 >   -0.429 
+Alloc Treatment:   1   Obs:     13  
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+Leaf 10:  x_cont1 <=  -0.937 x_cont0 <=   0.917 x_cont0 >   -0.090 x_cont1 <=  -1.523 
+Alloc Treatment:   2   Obs:     13  
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+Leaf 11:  x_cont1 <=  -0.937 x_cont0 <=   0.917 x_cont0 >   -0.090 x_cont1 >   -1.523 
+Alloc Treatment:   0   Obs:     40  
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+Leaf 20:  x_cont1 <=  -0.937 x_cont0 >    0.917 x_cont0 <=   1.325 x_cont0 <=   1.152 
+Alloc Treatment:   2   Obs:     14  
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+Leaf 21:  x_cont1 <=  -0.937 x_cont0 >    0.917 x_cont0 <=   1.325 x_cont0 >    1.152 
+Alloc Treatment:   2   Obs:     14  
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+Leaf 30:  x_cont1 <=  -0.937 x_cont0 >    0.917 x_cont0 >    1.325 x_cont0 <=   1.530 
+Alloc Treatment:   2   Obs:      7  
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+Leaf 31:  x_cont1 <=  -0.937 x_cont0 >    0.917 x_cont0 >    1.325 x_cont0 >    1.530 
+Alloc Treatment:   2   Obs:      9  
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+Leaf 40:  x_cont1 >   -0.937 x_cont1 <=  -0.252 x_cont1 <=  -0.607 x_cont0 <=   0.550 
+Alloc Treatment:   1   Obs:     52  
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+Leaf 41:  x_cont1 >   -0.937 x_cont1 <=  -0.252 x_cont1 <=  -0.607 x_cont0 >    0.550 
+Alloc Treatment:   2   Obs:     32  
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+Leaf 50:  x_cont1 >   -0.937 x_cont1 <=  -0.252 x_cont1 >   -0.607 x_cont2 <=   0.743 
+Alloc Treatment:   1   Obs:     60  
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+Leaf 51:  x_cont1 >   -0.937 x_cont1 <=  -0.252 x_cont1 >   -0.607 x_cont2 >    0.743 
+Alloc Treatment:   2   Obs:     34  
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+Leaf 60:  x_cont1 >   -0.937 x_cont1 >   -0.252 x_cont2 <=  -0.888 x_cont0 <=   0.629 
+Alloc Treatment:   2   Obs:     64  
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+Leaf 61:  x_cont1 >   -0.937 x_cont1 >   -0.252 x_cont2 <=  -0.888 x_cont0 >    0.629 
+Alloc Treatment:   1   Obs:     50  
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+Leaf 70:  x_cont1 >   -0.937 x_cont1 >   -0.252 x_cont2 >   -0.888 x_cont2 <=  -0.823 
+Alloc Treatment:   1   Obs:     11  
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+Leaf 71:  x_cont1 >   -0.937 x_cont1 >   -0.252 x_cont2 >   -0.888 x_cont2 >   -0.823 
+Alloc Treatment:   2   Obs:    313  
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+NOTE: Splitpoints displayed for ordered variables are midpoints between observable values (e.g., 0.5 for a variable with values of 0 and 1).
+
+----------------------------------------------------------------------------------------------------
+policy tree          Allocation  executed at: 2024-09-24 10:36:02.020829
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+Time for policy tree          allocation:   0:00:03.476492
+
+====================================================================================================
+Optimal Policy Modul (Evaluation) with policy tree
+----------------------------------------------------------------------------------------------------
+
+int_dict
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+cuda:  False
+parallel_processing:  True
+mp_parallel:  6
+output_no_new_dir:  False
+report:  True
+with_numba:  True
+with_output:  True
+xtr_parallel:  True
+
+gen_dict
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+method:  policy tree
+variable_importance:  False
+output_type:  2
+print_to_file:  True
+print_to_terminal:  True
+with_output:  True
+outpath:  Q:\SEW\Projekte\MLechner\Projekte und Angebote\Unicef\Kasachstan\Workshops\Astana\Wednesday_examples070/examplePT
+outfiletext:  Q:\SEW\Projekte\MLechner\Projekte und Angebote\Unicef\Kasachstan\Workshops\Astana\Wednesday_examples070/examplePT/txtFileWithOutput.txt
+outfilesummary:  Q:\SEW\Projekte\MLechner\Projekte und Angebote\Unicef\Kasachstan\Workshops\Astana\Wednesday_examples070/examplePT/txtFileWithOutput_Summary.txt
+d_values:  0 1 2
+no_of_treat:  3
+x_cont_flag:  True
+x_ord_flag:  False
+x_unord_flag:  False
+
+dc_dict
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+check_perfectcorr:  True
+clean_data:  True
+screen_covariates:  True
+min_dummy_obs:  10
+
+other_dict
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+costs_of_treat:  0 0 0
+costs_of_treat_mult:  1 1 1
+max_shares:  1 1 1
+restricted:  False
+max_by_treat:  [1595 1595 1595]
+
+rnd_dict
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+shares:  0.335423197492163 0.335423197492163 0.329153605015674
+
+var_dict
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+bb_restrict_name:  None
+d_name:  treat
+effect_vs_0:  None
+effect_vs_0_se:  None
+id_name:  id_mcfx
+polscore_desc_name:  None
+polscore_name:  outcome_lc0_un_lc_pot_eff outcome_lc1_un_lc_pot_eff outcome_lc2_un_lc_pot_eff
+x_ord_name:  x_cont0 x_cont1 x_cont2
+x_unord_name:  Not available
+vi_x_name:  None
+vi_to_dummy_name:  None
+protected_ord_name:  Not available
+protected_unord_name:  Not available
+material_ord_name:  Not available
+material_unord_name:  Not available
+name_ordered:  Not available
+z_name:  Not available
+x_name_remain:  Not available
+name_unordered:  Not available
+x_balance_name:  Not available
+x_name_always_in:  Not available
+x_name:  x_cont0 x_cont1 x_cont2
+
+var_x_type
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+x_cont0:  cont
+x_cont1:  cont
+x_cont2:  cont
+
+var_x_values
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+x_cont0:  -1.7305261476141034  ...  1.729986726245877
+x_cont1:  -1.7301707100645  ...  1.7258180098640734
+x_cont2:  -1.7308655489663822  ...  1.7318548916222118
+
+pt_dict
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+no_of_evalupoints:  100
+depth_tree_1:  3
+depth_tree_2:  3
+depth:  5
+depth_tree_1_adj:  2
+depth_tree_2_adj:  2
+total_depth_adj:  4
+min_leaf_size:  19.9375
+select_values_cat:  False
+enforce_restriction:  False
+eva_cat_mult:  1
+cost_of_treat_restrict:  [0 0 0]
+policy_tree:  [52787, None, 91753, 75205, 0, 'x_cont1', 'cont', np.float64(-0.9368279340076772), None] [91753, 52787, 39698, 90580, 0, 'x_cont0', 'cont', np.float64(0.9171925047491625), [0, 2]] [75205, 52787, 48009, 71369, 0, 'x_cont1', 'cont', np.float64(-0.2524660717781464), [1, 2]] [39698, 91753, 888, 41562, 0, 'x_cont0', 'cont', np.float64(-0.09035907839103019), None] [888, 39698, None, None, 1, 'x_cont0', 'cont', np.float64(-0.42855939329803583), [0, 1]] [41562, 39698, None, None, 1, 'x_cont1', 'cont', np.float64(-1.523206529574775), [2, 0]] [90580, 91753, 67974, 13655, 0, 'x_cont0', 'cont', np.float64(1.324769849429892), None] [67974, 90580, None, None, 1, 'x_cont0', 'cont', np.float64(1.1515565497870788), [2, 2]] [13655, 90580, None, None, 1, 'x_cont0', 'cont', np.float64(1.530464620897212), [2, 2]] [48009, 75205, 1045, 86224, 0, 'x_cont1', 'cont', np.float64(-0.6070177249998159), None] [1045, 48009, None, None, 1, 'x_cont0', 'cont', np.float64(0.5497888663618484), [1, 2]] [86224, 48009, None, None, 1, 'x_cont2', 'cont', np.float64(0.7430475522293332), [1, 2]] [71369, 75205, 78018, 4535, 0, 'x_cont2', 'cont', np.float64(-0.8881615154269522), None] [78018, 71369, None, None, 1, 'x_cont0', 'cont', np.float64(0.6288408398763501), [2, 1]] [4535, 71369, None, None, 1, 'x_cont2', 'cont', np.float64(-0.8234866651197905), [1, 2]]
+
+
+
+====================================================================================================
+Evaluating allocation of policy tree with Evaluate PT data
+----------------------------------------------------------------------------------------------------
+
+----------------------------------------------------------------------------------------------------
+Mean of variables / treatment shares      outcome_lc0_un_lc_pot_effalloc       0       1       2
+All Policy Tree                              1.0450        13.82%  23.37%  62.81%
+All observed                                 0.5718        31.16%  33.54%  35.30%
+All random                                   0.6224        30.03%  34.92%  35.05%
+Switchers Policy Tree                        1.0342        14.53%  23.09%  62.38%
+Switchers random                             0.5938        31.55%  35.24%  33.21%
+----------------------------------------------------------------------------------------------------
+
+----------------------------------------------------------------------------------------------------
+Descriptive statistics of features for Policy Tree
+----------------------------------------------------------------------------------------------------
+
+------------- Statistics by treatment status ------------------
+Number of observations:
+Policy Tree    0    1    2
+x_cont0      110  186  500
+
+Mean
+Policy Tree         0         1         2
+x_cont0     -0.541706  0.153079  0.104138
+x_cont1     -1.310685 -0.220045  0.351615
+x_cont2      0.080671 -0.497279  0.170326
+
+----------------------------------------------------------------------------------------------------
+Descriptive statistics of features for observed
+----------------------------------------------------------------------------------------------------
+
+------------- Statistics by treatment status ------------------
+Number of observations:
+observed    0    1    2
+x_cont0   248  267  281
+
+Mean
+observed         0         1         2
+x_cont0   0.177641  0.075782 -0.154217
+x_cont1   0.010486  0.003101 -0.045284
+x_cont2   0.067782  0.016235 -0.069758
+
+----------------------------------------------------------------------------------------------------
+Descriptive statistics of features for random
+----------------------------------------------------------------------------------------------------
+
+------------- Statistics by treatment status ------------------
+Number of observations:
+random     0    1    2
+x_cont0  239  278  279
+
+Mean
+random          0         1         2
+x_cont0 -0.051741  0.054180  0.065440
+x_cont1 -0.004070 -0.000228 -0.029607
+x_cont2 -0.020803  0.025623 -0.002181
+
+----------------------------------------------------------------------------------------------------
+Descriptive statistics of features for Policy Tree for switchers
+----------------------------------------------------------------------------------------------------
+
+------------- Statistics by treatment status ------------------
+Number of observations:
+Policy Tree   0    1    2
+x_cont0      78  124  335
+
+Mean
+Policy Tree         0         1         2
+x_cont0     -0.585326  0.140839  0.170866
+x_cont1     -1.315229 -0.246581  0.318696
+x_cont2      0.095991 -0.530734  0.205221
+
+----------------------------------------------------------------------------------------------------
+Descriptive statistics of features for random for switchers
+----------------------------------------------------------------------------------------------------
+
+------------- Statistics by treatment status ------------------
+Number of observations:
+random     0    1    2
+x_cont0  171  191  180
+
+Mean
+random          0         1         2
+x_cont0 -0.123002 -0.049936  0.138407
+x_cont1 -0.006861 -0.019760  0.023335
+x_cont2 -0.056370  0.079338 -0.029550
+
+----------------------------------------------------------------------------------------------------
+Evaluation of Evaluate PT data with policy tree executed at: 2024-09-24 10:36:08.124053
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+Time for Evaluation Evaluate PT data:      0:00:06.020905
+
+
+====================================================================================================
+Summary of computation times of all steps
+
+----------------------------------------------------------------------------------------------------
+policy tree          Training  executed at: 2024-09-24 10:35:52.323921
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+Time for policy tree          training:     0:00:16.874079
+
+----------------------------------------------------------------------------------------------------
+Evaluation of Training PT data with policy tree executed at: 2024-09-24 10:35:58.472043
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+Time for Evaluation Training PT data:      0:00:06.057864
+
+----------------------------------------------------------------------------------------------------
+policy tree          Allocation  executed at: 2024-09-24 10:36:02.020829
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+Time for policy tree          allocation:   0:00:03.476492
+
+----------------------------------------------------------------------------------------------------
+Evaluation of Evaluate PT data with policy tree executed at: 2024-09-24 10:36:08.124053
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+Time for Evaluation Evaluate PT data:      0:00:06.020905

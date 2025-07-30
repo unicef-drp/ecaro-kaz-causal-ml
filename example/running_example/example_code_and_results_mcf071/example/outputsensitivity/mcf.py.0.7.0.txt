@@ -1,0 +1,45 @@
+
+
+
+
+====================================================================================================
+Sensitivity analysis
+
+----------------------------------------------------------------------------------------------------
+Sensitivity: Computing treatment probabilities (by 5-fold cross-validation)
+
+----------------------------------------------------------------------------------------------------
+Largest treatment group (training data): Value 1.0, # of observations: 334 
+Share of observations kept: 33.40%
+Sensivity analysis continues with observations kept only
+----------------------------------------------------------------------------------------------------
+
+xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+Sensitivity: Scenario: basic
+
+Sensitivity - Scenario: basic, Replication: 1, Simulated treatment shares: 29.34%, 42.51%, 28.14%
+
+Sensitivity - Scenario: basic, Replication: 2, Simulated treatment shares: 29.64%, 38.92%, 31.44%
+
+----------------------------------------------------------------------------------------------------
+Sensitivity - Result scenario: basic
+
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+ATEs (only if p-value < 10%)
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+Scenario: basic ATE (sensitivity) Outcome variable: outcome_lc   Reference population: All
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+Comparison                Estimate   Standard error t-value   p-value
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+
+Scenario: basic   Descriptive statistics of IATE
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+Variable: outcome_lc1vs0_iate   Mean:     0.1724   Median:     0.1672   Std.:     0.0897
+Variable: outcome_lc2vs0_iate   Mean:     0.2669   Median:     0.2663   Std.:     0.1032
+Variable: outcome_lc2vs1_iate   Mean:     0.0945   Median:     0.0922   Std.:     0.0928
+
+----------------------------------------------------------------------------------------------------
+Sensitiviy analysis executed at: 2024-09-24 10:17:53.791526
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+Total time for sensitivity analysis:             0:02:21.927432

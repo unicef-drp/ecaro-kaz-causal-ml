@@ -1,0 +1,768 @@
+
+
+
+====================================================================================================
+Modified Causal Forest: Training 
+----------------------------------------------------------------------------------------------------
+
+====================================================================================================
+Common support analysis
+
+----------------------------------------------------------------------------------------------------
+Common support bounds adjusted by 5.00%-points
+----------------------------------------------------------------------------------------------------
+Treatment sample     Treatment probabilities in %
+--------------------- Upper limits ----------------
+D =         0          100.00%   86.63%   71.00%  
+D =         1          100.00%   66.60%   76.02%  
+D =         2          100.00%   90.28%   79.79%  
+--------------------- Lower limits ----------------
+D =         0            0.00%    5.15%    3.30%  
+D =         1            0.00%    4.85%    4.54%  
+D =         2            0.00%    5.56%    4.09%  
+----------------------------------------------------------------------------------------------------
+First treatment is set to 1 and 0 (ignored) due to additivity.
+----------------------------------------------------------------------------------------------------
+Upper limits used: 100.00%  66.60%  71.00%
+Lower limits used:   0.00%   5.56%   4.54%
+----------------------------------------------------------------------------------------------------
+
+----------------------------------------------------------------------------------------------------
+Data investigated for common support: Training - fill mcf with y data
+----------------------------------------------------------------------------------------------------
+Observations deleted:    5 (0.62%)
+----------------------------------------------------------------------------------------------------
+
+Observations kept, by treatment
+           Obs.  Share in %
+treat                  
+0.0     271       34.09
+1.0     258       32.45
+2.0     266       33.46
+-   -   -   -   -   -   -   -   -   -   -   -   -   -   -   -   -   -   -   -   
+Observations deleted, by treatment
+        Obs.  Share in %
+treat                  
+0.0       1        20.0
+1.0       4        80.0
+
+----------------------------------------------------------------------------------------------------
+Data investigated for common support: Training - build mcf data
+----------------------------------------------------------------------------------------------------
+Observations deleted:   11 (1.38%)
+----------------------------------------------------------------------------------------------------
+
+Observations kept, by treatment
+           Obs.  Share in %
+treat                  
+0.0     272       34.47
+1.0     266       33.71
+2.0     251       31.81
+-   -   -   -   -   -   -   -   -   -   -   -   -   -   -   -   -   -   -   -   
+Observations deleted, by treatment
+        Obs.  Share in %
+treat                  
+0.0       4       36.36
+1.0       2       18.18
+2.0       5       45.45
+
+------------- Statistics by treatment status ------------------
+Number of observations:
+treat    0.0  1.0  2.0
+outcome  543  524  517
+
+Mean
+treat         0.0       1.0       2.0
+outcome -0.105171  0.887848  0.853198
+
+Median
+treat         0.0       1.0       2.0
+outcome -0.093421  0.947561  0.865042
+
+Standard deviation
+treat         0.0       1.0       2.0
+outcome  1.458656  1.760877  1.847554
+
+====================================================================================================
+Balancing tests (descriptive)
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+
+Comparing treatments  2 and  1
+Variable                          Mean       Std        t-val   p-val (%) Stand.Difference (%)
+outcome                          -0.03465   0.11189      0.31    75.68     -1.92
+
+Comparing treatments  2 and  0
+Variable                          Mean       Std        t-val   p-val (%) Stand.Difference (%)
+outcome                           0.95837   0.10257      9.34     0.00     57.58
+
+Comparing treatments  1 and  0
+Variable                          Mean       Std        t-val   p-val (%) Stand.Difference (%)
+outcome                           0.99302   0.09918     10.01     0.00     61.42
+====================================================================================================
+Local Centering
+
+----------------------------------------------------------------------------------------------------
+Fit of Ey|x for local centering (Best method: Random Forest); R2for outcome: 5.87% 
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+
+Short info on data used:
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+<class 'pandas.core.frame.DataFrame'>
+Index: 1584 entries, 0 to 794
+Data columns (total 3 columns):
+ #   Column        Non-Null Count  Dtype  
+---  ------        --------------  -----  
+ 0   outcome       1584 non-null   float64
+ 1   outcome_lc    1584 non-null   float64
+ 2   outcome_Ey_x  1584 non-null   float64
+dtypes: float64(3)
+memory usage: 49.5 KB
+
+           outcome   outcome_lc  outcome_Ey_x
+count  1584.000000  1584.000000   1584.000000
+mean      0.536129    -0.002747      0.538875
+std       1.755115     1.697580      0.779734
+min      -3.915846    -5.171810     -1.525757
+25%      -0.763834    -1.197365     -0.018080
+50%       0.550431    -0.007893      0.455714
+75%       1.715634     1.218160      1.081174
+max       5.913391     4.997131      3.280218
+
+New variable to build trees in RF:  outcome_lc
+
+Matched outcomes
+
+Short info on data used:
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+<class 'pandas.core.frame.DataFrame'>
+RangeIndex: 789 entries, 0 to 788
+Data columns (total 3 columns):
+ #   Column          Non-Null Count  Dtype  
+---  ------          --------------  -----  
+ 0   outcome_lc_NN0  789 non-null    float64
+ 1   outcome_lc_NN1  789 non-null    float64
+ 2   outcome_lc_NN2  789 non-null    float64
+dtypes: float64(3)
+memory usage: 18.6 KB
+
+       outcome_lc_NN0  outcome_lc_NN1  outcome_lc_NN2
+count      789.000000      789.000000      789.000000
+mean        -0.704275        0.216450        0.611799
+std          1.751981        1.552019        1.634880
+min         -5.171810       -4.334283       -3.607043
+25%         -1.933210       -0.785327       -0.586949
+50%         -0.600559        0.239506        0.555930
+75%          0.646493        1.350742        1.691336
+max          3.726693        4.369911        4.288569
+
+Statistics on matched neighbours of variable used for tree building
+
+----------------------------------------------------------------------------------------------------
+Parameters of estimation to build random forest
+Outcome variable used to build forest: outcome_lc
+Features used to build forest:          x_cont0 x_cont1 x_cont2
+Variables always included in splitting: 
+Number of replications:     1000
+Splitting rule used:        MSE+MCE criterion
+Penalty used in splitting:  4.846788291391943 Penalty method: MSE of treatment prediction 
+Share of data in subsample for forest building: 0.67
+Share of data in subsample for forest evaluation: 1   
+Total number of variables available for splitting: 3   
+# of variables (M) used for split: 2   
+           (# of variables drawn from 1+Poisson(M-1))
+Minimum threshold for using Poisson: 10
+Minimum leaf size:                 5   
+Alpha regularity:                  0.100
+------------------- Estimated trees ----------------------------
+Average # of leaves:                      76.7
+Average size of leaves:                    6.9
+Median size of leaves:                     6.0
+Min size of leaves:                          5
+Max size of leaves:                         35
+Average # of obs in leaves (single tree):  529
+----------------------------------------------------------------------------------------------------
+
+Share of merged leaves (w/o all treatments per tree): 17.961%
+Share of leaves w/o all treatments per tree (after merger): 0.228%
+Incomplete leafs will not be considered for weight computation.
+----------------------------------------------------------------------------------------------------
+Size of forest: 10.63 MB
+----------------------------------------------------------------------------------------------------
+
+----------------------------------------------------------------------------------------------------
+Parameters of estimation to build random forest
+Outcome variable used to build forest: outcome_lc
+Features used to build forest:          x_cont0 x_cont1 x_cont2
+Variables always included in splitting: 
+Number of replications:     1000
+Splitting rule used:        MSE+MCE criterion
+Penalty used in splitting:  5.0827639762446015 Penalty method: MSE of treatment prediction 
+Share of data in subsample for forest building: 0.67
+Share of data in subsample for forest evaluation: 1   
+Total number of variables available for splitting: 3   
+# of variables (M) used for split: 2   
+           (# of variables drawn from 1+Poisson(M-1))
+Minimum threshold for using Poisson: 10
+Minimum leaf size:                 5   
+Alpha regularity:                  0.100
+------------------- Estimated trees ----------------------------
+Average # of leaves:                      77.5
+Average size of leaves:                    6.9
+Median size of leaves:                     6.0
+Min size of leaves:                          5
+Max size of leaves:                         24
+Average # of obs in leaves (single tree):  533
+----------------------------------------------------------------------------------------------------
+
+Share of merged leaves (w/o all treatments per tree): 18.762%
+Share of leaves w/o all treatments per tree (after merger): 0.218%
+Incomplete leafs will not be considered for weight computation.
+----------------------------------------------------------------------------------------------------
+Size of forest: 10.7 MB
+----------------------------------------------------------------------------------------------------
+
+----------------------------------------------------------------------------------------------------
+Training executed at: 2024-09-24 10:30:44.718484
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+Data preparation and stats I:                    0:00:08.037698
+Feature preselection:                            0:00:00.475935
+Common support:                                  0:00:13.512884
+Local centering (recoding of Y):                 0:00:07.196351
+Training the causal forest:                      0:02:15.036980
+  ... of which is time for variable importance:  0:00:00
+
+Total time training:                             0:02:44.259848
+
+====================================================================================================
+Modified Causal Forest: Prediction
+----------------------------------------------------------------------------------------------------
+
+====================================================================================================
+Common support analysis
+
+----------------------------------------------------------------------------------------------------
+Data investigated for common support: Prediction data
+----------------------------------------------------------------------------------------------------
+Observations deleted:    5 (0.31%)
+----------------------------------------------------------------------------------------------------
+
+Observations kept, by treatment
+           Obs.  Share in %
+treat                  
+0.0     535       33.54
+1.0     535       33.54
+2.0     525       32.92
+-   -   -   -   -   -   -   -   -   -   -   -   -   -   -   -   -   -   -   -   
+Observations deleted, by treatment
+        Obs.  Share in %
+treat                  
+0.0       1        20.0
+1.0       1        20.0
+2.0       3        60.0
+
+------------- Statistics by treatment status ------------------
+Number of observations:
+treat    0.0  1.0  2.0
+x_cont0  535  535  525
+
+Mean
+treat         0.0       1.0       2.0
+x_cont0  0.055182 -0.009422 -0.102446
+x_cont1  0.098317  0.077329 -0.198488
+x_cont2  0.126972 -0.055543 -0.076023
+
+Median
+treat         0.0       1.0       2.0
+x_cont0  0.048817 -0.001583 -0.245983
+x_cont1  0.119909  0.076391 -0.358309
+x_cont2  0.156153 -0.115868 -0.016411
+
+Standard deviation
+treat         0.0       1.0       2.0
+x_cont0  0.999128  0.952511  0.988696
+x_cont1  1.014755  1.019355  0.963566
+x_cont2  0.988200  1.013227  0.982229
+
+====================================================================================================
+Balancing tests (descriptive)
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+
+Comparing treatments  2 and  1
+Variable                          Mean       Std        t-val   p-val (%) Stand.Difference (%)
+x_cont0                          -0.09302   0.05965      1.56    11.89     -9.58
+x_cont1                          -0.27582   0.06092      4.53     0.00    -27.81
+x_cont2                          -0.02048   0.06129      0.33    73.83     -2.05
+
+Comparing treatments  2 and  0
+Variable                          Mean       Std        t-val   p-val (%) Stand.Difference (%)
+x_cont0                          -0.15763   0.06106      2.58     0.98    -15.86
+x_cont1                          -0.29681   0.06077      4.88     0.00    -30.00
+x_cont2                          -0.20300   0.06052      3.35     0.08    -20.60
+
+Comparing treatments  1 and  0
+Variable                          Mean       Std        t-val   p-val (%) Stand.Difference (%)
+x_cont0                          -0.06460   0.05968      1.08    27.90     -6.62
+x_cont1                          -0.02099   0.06218      0.34    73.57     -2.06
+x_cont2                          -0.18251   0.06119      2.98     0.29    -18.24
+====================================================================================================
+Local Centering
+
+
+====================================================================================================
+Average Treatment Effects Estimation
+----------------------------------------------------------------------------------------------------
+Potential outcomes
+----------------------------------------------------------------------------------------------------
+Outcome variable: outcome_lc    Reference population: All
+Treatment  Potential Outcome  SE of PO       Uncentered Outcome
+0             -0.663102       0.099373          -0.140899
+1              0.546796       0.101857           1.068999
+2              0.368292       0.107303           0.890496
+----------------------------------------------------------------------------------------------------
+Treatment effects (ATE, ATETs)
+----------------------------------------------------------------------------------------------------
+Outcome variable: outcome_lc   Reference population: All
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+Comparison                Estimate   Standard error t-value   p-value
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+1         vs         0     1.209899      0.142302     8.50    0.000% ****
+2         vs         0     1.031395      0.146250     7.05    0.000% ****
+2         vs         1    -0.178504      0.147948     1.21   22.761% 
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+
+====================================================================================================
+Descriptives for IATE estimation
+----------------------------------------------------------------------------------------------------
+Effect: IATE
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+Outcome variable: outcome
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+Comparison        Mean       Median           Std    Effect > 0
+1    vs    0      1.20470      1.04780      1.01636  86.02%
+2    vs    0      1.04867      0.78704      1.17305  78.81%
+2    vs    1     -0.15603     -0.19917      0.43857  35.61%
+----------------------------------------------------------------------------------------------------
+
+----------------------------------------------------------------------------------------------------
+
+Individualized ATE
+
+Short info on data used:
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+<class 'pandas.core.frame.DataFrame'>
+RangeIndex: 1595 entries, 0 to 1594
+Data columns (total 18 columns):
+ #   Column                     Non-Null Count  Dtype  
+---  ------                     --------------  -----  
+ 0   outcome_lc0_pot            1595 non-null   float64
+ 1   outcome_lc1_pot            1595 non-null   float64
+ 2   outcome_lc2_pot            1595 non-null   float64
+ 3   outcome_lc1vs0_iate        1595 non-null   float64
+ 4   outcome_lc2vs0_iate        1595 non-null   float64
+ 5   outcome_lc2vs1_iate        1595 non-null   float64
+ 6   outcome_lc0_un_lc_pot      1595 non-null   float64
+ 7   outcome_lc1_un_lc_pot      1595 non-null   float64
+ 8   outcome_lc2_un_lc_pot      1595 non-null   float64
+ 9   outcome_lc0_pot_eff        1595 non-null   float64
+ 10  outcome_lc1_pot_eff        1595 non-null   float64
+ 11  outcome_lc2_pot_eff        1595 non-null   float64
+ 12  outcome_lc1vs0_iate_eff    1595 non-null   float64
+ 13  outcome_lc2vs0_iate_eff    1595 non-null   float64
+ 14  outcome_lc2vs1_iate_eff    1595 non-null   float64
+ 15  outcome_lc0_un_lc_pot_eff  1595 non-null   float64
+ 16  outcome_lc1_un_lc_pot_eff  1595 non-null   float64
+ 17  outcome_lc2_un_lc_pot_eff  1595 non-null   float64
+dtypes: float64(18)
+memory usage: 224.4 KB
+
+                            count      mean       std       min       25%       50%       75%       max
+outcome_lc0_pot            1595.0 -0.672891  0.635975 -2.057437 -1.244294 -0.592631 -0.198644  0.786832
+outcome_lc1_pot            1595.0  0.531810  0.471040 -0.472295  0.118032  0.494654  0.906951  1.854320
+outcome_lc2_pot            1595.0  0.375782  0.627201 -1.219541 -0.043623  0.341616  0.904747  1.631094
+outcome_lc1vs0_iate        1595.0  1.204701  1.016674 -0.847625  0.265626  1.047803  2.242288  3.323703
+outcome_lc2vs0_iate        1595.0  1.048673  1.173419 -1.411178  0.134346  0.787044  2.180281  3.261366
+outcome_lc2vs1_iate        1595.0 -0.156028  0.438706 -1.445453 -0.484548 -0.199169  0.186678  0.899085
+outcome_lc0_un_lc_pot      1595.0 -0.150688  0.493208 -1.807707 -0.496948 -0.140901  0.193272  1.448562
+outcome_lc1_un_lc_pot      1595.0  1.054013  1.068631 -1.448211  0.229075  0.891830  1.972300  3.668103
+outcome_lc2_un_lc_pot      1595.0  0.897985  1.248061 -2.546379  0.032084  0.687284  1.924516  4.172454
+outcome_lc0_pot_eff        1595.0 -0.665964  0.602688 -1.788649 -1.254233 -0.564802 -0.129104  0.440185
+outcome_lc1_pot_eff        1595.0  0.393436  0.443453 -0.366359 -0.008283  0.285019  0.811267  1.479649
+outcome_lc2_pot_eff        1595.0  0.439433  0.520431 -0.719332  0.034096  0.377242  0.944080  1.418273
+outcome_lc1vs0_iate_eff    1595.0  1.059400  1.011004 -0.700025  0.134260  0.783797  2.176836  2.733272
+outcome_lc2vs0_iate_eff    1595.0  1.105397  1.091966 -0.863724  0.159109  0.897267  2.305303  2.993929
+outcome_lc2vs1_iate_eff    1595.0  0.045997  0.275780 -0.719983 -0.151098  0.040470  0.257457  0.886746
+outcome_lc0_un_lc_pot_eff  1595.0 -0.143761  0.506353 -1.731352 -0.495243 -0.152426  0.210004  1.531735
+outcome_lc1_un_lc_pot_eff  1595.0  0.915639  1.098931 -1.732987  0.062027  0.729577  1.844256  3.915144
+outcome_lc2_un_lc_pot_eff  1595.0  0.961636  1.156633 -2.014994  0.099282  0.764184  1.930423  3.900820
+
+----------------------------------------------------------------------------------------------------
+Prediction executed at: 2024-09-24 10:33:10.496012
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+Data preparation and stats II:                   0:00:09.641291
+Common support:                                  0:00:02.685701
+Local centering (recoding of Y):                 0:00:00.756352
+Weights:                                         0:01:48.539121
+ATEs:                                            0:00:00.729273
+GATEs:                                           0:00:00
+BGATEs:                                          0:00:00
+CBGATEs:                                         0:00:00
+IATEs:                                           0:00:23.307492
+Balancing test:                                  0:00:00
+
+Total time prediction:                           0:02:25.661106
+
+
+====================================================================================================
+Post estimation analysis: Effects only relative to treatment 0 are considered
+
+====================================================================================================
+Correlations of effects with ... in %
+----------------------------------------------------------------------------------------------------
+Effect: outcome_lc1vs0_iate
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+outcome_lc1vs0_iate   100.00%
+outcome_lc2vs0_iate    92.96%
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+outcome_lc0_un_lc_pot  -13.45%
+outcome_lc1_un_lc_pot   88.93%
+outcome_lc2_un_lc_pot   82.09%
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+x_cont0                37.80%
+x_cont1                68.86%
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+Effect: outcome_lc2vs0_iate
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+outcome_lc1vs0_iate    92.96%
+outcome_lc2vs0_iate   100.00%
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+outcome_lc0_un_lc_pot   -5.40%
+outcome_lc1_un_lc_pot   85.95%
+outcome_lc2_un_lc_pot   91.89%
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+x_cont0                57.68%
+x_cont1                62.76%
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+
+====================================================================================================
+K-Means++ clustering (all effects jointly)
+----------------------------------------------------------------------------------------------------
+Number of clusters: 3   Average silhouette score:    0.558
+Number of clusters: 4   Average silhouette score:    0.511
+Number of clusters: 5   Average silhouette score:    0.441
+Number of clusters: 6   Average silhouette score:    0.407
+Number of clusters: 7   Average silhouette score:    0.402
+
+Best value of average silhouette score:    0.558
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+Effects are ordered w.r.t. to the size of the effects for the first outcome and first treatment.
+----------------------------------------------------------------------------------------------------
+Number of observations in the clusters
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+Cluster  0:    445 
+Cluster  1:    550 
+Cluster  2:    600 
+----------------------------------------------------------------------------------------------------
+Effects
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+                            0         1         2
+outcome_lc1vs0_iate  0.025831  0.902856  2.355719
+outcome_lc2vs0_iate -0.310687  0.708872  2.368349
+----------------------------------------------------------------------------------------------------
+Potential outcomes
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+                              0         1         2
+outcome_lc0_un_lc_pot -0.048353 -0.181021 -0.198780
+outcome_lc1_un_lc_pot -0.022521  0.721835  2.156939
+outcome_lc2_un_lc_pot -0.359040  0.527850  2.169569
+----------------------------------------------------------------------------------------------------
+Covariates
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+                0         1         2
+x_cont0 -0.370355 -0.396864  0.589634
+x_cont1 -1.061744  0.075587  0.701113
+x_cont2 -0.064823  0.030818  0.016998
+----------------------------------------------------------------------------------------------------
+====================================================================================================
+Post estimation random forests for outcome_lc1vs0_iate
+
+----------------------------------------------------------------------------------------------------
+Tuning values choosen for forest (if any)
+----------------------------------------------------------------------------------------------------
+Dependent variable: o N_min:  2M_Try:  2 Alpha: 0.000|  OOB R2 (in %):  98.5154
+----------------------------------------------------------------------------------------------------
+{'bootstrap': True, 'ccp_alpha': 0.0, 'criterion': 'squared_error', 'max_depth': None, 'max_features': 2, 'max_leaf_nodes': None, 'max_samples': None, 'min_impurity_decrease': 0.0, 'min_samples_leaf': 2, 'min_samples_split': 2, 'min_weight_fraction_leaf': 0, 'monotonic_cst': None, 'n_estimators': 1000, 'n_jobs': 6, 'oob_score': True, 'random_state': 42, 'verbose': 0, 'warm_start': False}
+----------------------------------------------------------------------------------------------------
+outcome_lc1vs0_iate: R2(%) OOB:  98.5154
+----------------------------------------------------------------------------------------------------
+
+----------------------------------------------------------------------------------------------------
+Variable importance statistics in %-point of R2 lost when omitting particular variable
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+Unordered variables are included (in RF and VI) as dummies and the variable itself.
+x_cont1                                           : 148.53%
+x_cont0                                           :  66.92%
+x_cont2                                           :   3.31%
+----------------------------------------------------------------------------------------------------
+
+----------------------------------------------------------------------------------------------------
+Tree based evaluation of outcome_lc1vs0_iate
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+Out-of-sample fit for standard & honest tree (R squared)
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+Depth     Standard tree      Honest tree
+    2            85.52%           85.59%
+    3            92.39%           92.51%
+    4            93.71%           93.93%
+    5            94.65%           94.73%
+----------------------------------------------------------------------------------------------------
+
+Post estimation random forests for outcome_lc2vs0_iate
+
+----------------------------------------------------------------------------------------------------
+Tuning values choosen for forest (if any)
+----------------------------------------------------------------------------------------------------
+Dependent variable: o N_min:  2M_Try:  2 Alpha: 0.000|  OOB R2 (in %):  98.9164
+----------------------------------------------------------------------------------------------------
+{'bootstrap': True, 'ccp_alpha': 0.0, 'criterion': 'squared_error', 'max_depth': None, 'max_features': 2, 'max_leaf_nodes': None, 'max_samples': None, 'min_impurity_decrease': 0.0, 'min_samples_leaf': 2, 'min_samples_split': 2, 'min_weight_fraction_leaf': 0, 'monotonic_cst': None, 'n_estimators': 1000, 'n_jobs': 6, 'oob_score': True, 'random_state': 42, 'verbose': 0, 'warm_start': False}
+----------------------------------------------------------------------------------------------------
+outcome_lc2vs0_iate: R2(%) OOB:  98.9164
+----------------------------------------------------------------------------------------------------
+
+----------------------------------------------------------------------------------------------------
+Variable importance statistics in %-point of R2 lost when omitting particular variable
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+Unordered variables are included (in RF and VI) as dummies and the variable itself.
+x_cont1                                           : 118.07%
+x_cont0                                           :  83.89%
+x_cont2                                           :   3.66%
+----------------------------------------------------------------------------------------------------
+
+----------------------------------------------------------------------------------------------------
+Tree based evaluation of outcome_lc2vs0_iate
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+Out-of-sample fit for standard & honest tree (R squared)
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+Depth     Standard tree      Honest tree
+    2            83.15%           83.23%
+    3            89.43%           89.43%
+    4            92.82%           92.85%
+    5            94.75%           94.73%
+----------------------------------------------------------------------------------------------------
+
+
+----------------------------------------------------------------------------------------------------
+Training executed at: 2024-09-24 10:30:44.718484
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+Data preparation and stats I:                    0:00:08.037698
+Feature preselection:                            0:00:00.475935
+Common support:                                  0:00:13.512884
+Local centering (recoding of Y):                 0:00:07.196351
+Training the causal forest:                      0:02:15.036980
+  ... of which is time for variable importance:  0:00:00
+
+Total time training:                             0:02:44.259848
+
+
+----------------------------------------------------------------------------------------------------
+Prediction executed at: 2024-09-24 10:33:10.496012
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+Data preparation and stats II:                   0:00:09.641291
+Common support:                                  0:00:02.685701
+Local centering (recoding of Y):                 0:00:00.756352
+Weights:                                         0:01:48.539121
+ATEs:                                            0:00:00.729273
+GATEs:                                           0:00:00
+BGATEs:                                          0:00:00
+CBGATEs:                                         0:00:00
+IATEs:                                           0:00:23.307492
+Balancing test:                                  0:00:00
+
+Total time prediction:                           0:02:25.661106
+
+
+----------------------------------------------------------------------------------------------------
+Analysis of IATE executed at: 2024-09-24 10:34:04.416192
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+Correlational analysis and plots of IATE:        0:00:04.044948
+K-means clustering of IATE:                      0:00:00.739594
+Random forest / tree analysis of IATE:           0:00:48.896447
+
+Total time post estimation analysis:             0:00:53.680990
+
+====================================================================================================
+Modified Causal Forest: Prediction
+----------------------------------------------------------------------------------------------------
+
+====================================================================================================
+Common support analysis
+
+----------------------------------------------------------------------------------------------------
+Data investigated for common support: Prediction data
+----------------------------------------------------------------------------------------------------
+Observations deleted:    4 (0.50%)
+----------------------------------------------------------------------------------------------------
+
+Observations kept, by treatment
+           Obs.  Share in %
+treat                  
+0.0     248       31.16
+1.0     267       33.54
+2.0     281       35.30
+-   -   -   -   -   -   -   -   -   -   -   -   -   -   -   -   -   -   -   -   
+Observations deleted, by treatment
+        Obs.  Share in %
+treat                  
+0.0       1        25.0
+1.0       1        25.0
+2.0       2        50.0
+
+------------- Statistics by treatment status ------------------
+Number of observations:
+treat    0.0  1.0  2.0
+x_cont0  248  267  281
+
+Mean
+treat         0.0       1.0       2.0
+x_cont0  0.177641  0.075782 -0.154217
+x_cont1  0.010486  0.003101 -0.045284
+x_cont2  0.067782  0.016235 -0.069758
+
+Median
+treat         0.0       1.0       2.0
+x_cont0  0.200334  0.079612 -0.291138
+x_cont1  0.009893 -0.003772 -0.094989
+x_cont2  0.069436  0.101332 -0.154942
+
+Standard deviation
+treat         0.0       1.0       2.0
+x_cont0  0.997997  0.980833  1.032339
+x_cont1  1.018833  1.018738  0.981204
+x_cont2  1.007776  0.984053  0.958865
+
+====================================================================================================
+Balancing tests (descriptive)
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+
+Comparing treatments  2 and  1
+Variable                          Mean       Std        t-val   p-val (%) Stand.Difference (%)
+x_cont0                          -0.23000   0.08600      2.67     0.75    -22.84
+x_cont1                          -0.04838   0.08552      0.57    57.15     -4.84
+x_cont2                          -0.08599   0.08306      1.04    30.05     -8.85
+
+Comparing treatments  2 and  0
+Variable                          Mean       Std        t-val   p-val (%) Stand.Difference (%)
+x_cont0                          -0.33186   0.08837      3.76     0.02    -32.69
+x_cont1                          -0.05577   0.08725      0.64    52.27     -5.58
+x_cont2                          -0.13754   0.08583      1.60    10.91    -13.98
+
+Comparing treatments  1 and  0
+Variable                          Mean       Std        t-val   p-val (%) Stand.Difference (%)
+x_cont0                          -0.10186   0.08729      1.17    24.32    -10.29
+x_cont1                          -0.00738   0.08985      0.08    93.45     -0.72
+x_cont2                          -0.05155   0.08788      0.59    55.75     -5.18
+====================================================================================================
+Local Centering
+
+
+====================================================================================================
+Average Treatment Effects Estimation
+----------------------------------------------------------------------------------------------------
+Potential outcomes
+----------------------------------------------------------------------------------------------------
+Outcome variable: outcome_lc    Reference population: All
+Treatment  Potential Outcome  SE of PO       Uncentered Outcome
+0             -0.643388       0.100646          -0.123766
+1              0.548797       0.103021           1.068419
+2              0.384270       0.109039           0.903892
+----------------------------------------------------------------------------------------------------
+Treatment effects (ATE, ATETs)
+----------------------------------------------------------------------------------------------------
+Outcome variable: outcome_lc   Reference population: All
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+Comparison                Estimate   Standard error t-value   p-value
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+1         vs         0     1.192185      0.144024     8.28    0.000% ****
+2         vs         0     1.027658      0.148389     6.93    0.000% ****
+2         vs         1    -0.164527      0.150009     1.10   27.274% 
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+
+====================================================================================================
+Descriptives for IATE estimation
+----------------------------------------------------------------------------------------------------
+Effect: IATE
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+Outcome variable: outcome
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+Comparison        Mean       Median           Std    Effect > 0
+1    vs    0      1.19803      1.00975      1.02601  87.56%
+2    vs    0      1.04942      0.78093      1.16274  81.16%
+2    vs    1     -0.14861     -0.18638      0.44386  37.44%
+----------------------------------------------------------------------------------------------------
+
+----------------------------------------------------------------------------------------------------
+
+Individualized ATE
+
+Short info on data used:
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+<class 'pandas.core.frame.DataFrame'>
+RangeIndex: 796 entries, 0 to 795
+Data columns (total 18 columns):
+ #   Column                     Non-Null Count  Dtype  
+---  ------                     --------------  -----  
+ 0   outcome_lc0_pot            796 non-null    float64
+ 1   outcome_lc1_pot            796 non-null    float64
+ 2   outcome_lc2_pot            796 non-null    float64
+ 3   outcome_lc1vs0_iate        796 non-null    float64
+ 4   outcome_lc2vs0_iate        796 non-null    float64
+ 5   outcome_lc2vs1_iate        796 non-null    float64
+ 6   outcome_lc0_un_lc_pot      796 non-null    float64
+ 7   outcome_lc1_un_lc_pot      796 non-null    float64
+ 8   outcome_lc2_un_lc_pot      796 non-null    float64
+ 9   outcome_lc0_pot_eff        796 non-null    float64
+ 10  outcome_lc1_pot_eff        796 non-null    float64
+ 11  outcome_lc2_pot_eff        796 non-null    float64
+ 12  outcome_lc1vs0_iate_eff    796 non-null    float64
+ 13  outcome_lc2vs0_iate_eff    796 non-null    float64
+ 14  outcome_lc2vs1_iate_eff    796 non-null    float64
+ 15  outcome_lc0_un_lc_pot_eff  796 non-null    float64
+ 16  outcome_lc1_un_lc_pot_eff  796 non-null    float64
+ 17  outcome_lc2_un_lc_pot_eff  796 non-null    float64
+dtypes: float64(18)
+memory usage: 112.1 KB
+
+                           count      mean       std       min       25%       50%       75%       max
+outcome_lc0_pot            796.0 -0.663609  0.623967 -1.907967 -1.223414 -0.607593 -0.218319  0.916142
+outcome_lc1_pot            796.0  0.534419  0.489555 -0.297976  0.113889  0.457190  0.937829  1.888273
+outcome_lc2_pot            796.0  0.385811  0.636992 -1.265849 -0.028649  0.336043  0.890202  1.662360
+outcome_lc1vs0_iate        796.0  1.198028  1.026657 -0.988609  0.289307  1.009752  2.250657  3.147049
+outcome_lc2vs0_iate        796.0  1.049420  1.163466 -1.331182  0.173154  0.780929  2.169805  3.280192
+outcome_lc2vs1_iate        796.0 -0.148608  0.444139 -1.570629 -0.467890 -0.186382  0.196178  0.843021
+outcome_lc0_un_lc_pot      796.0 -0.143987  0.503130 -1.686781 -0.457371 -0.128442  0.199963  1.519111
+outcome_lc1_un_lc_pot      796.0  1.054040  1.104749 -1.573244  0.191672  0.912856  1.979169  3.680166
+outcome_lc2_un_lc_pot      796.0  0.905433  1.265389 -2.159403  0.050632  0.688836  1.912945  3.747788
+outcome_lc0_pot_eff        796.0 -0.657793  0.589608 -1.769072 -1.243997 -0.567630 -0.140014  0.495868
+outcome_lc1_pot_eff        796.0  0.393787  0.458493 -0.321032 -0.015124  0.250001  0.812681  1.438249
+outcome_lc2_pot_eff        796.0  0.440569  0.519735 -0.695587  0.055179  0.359639  0.953848  1.510984
+outcome_lc1vs0_iate_eff    796.0  1.051580  1.012615 -0.763684  0.159764  0.779382  2.195541  2.783733
+outcome_lc2vs0_iate_eff    796.0  1.098361  1.075144 -0.847454  0.163757  0.900821  2.293729  2.946419
+outcome_lc2vs1_iate_eff    796.0  0.046782  0.278956 -0.776101 -0.158441  0.036078  0.250914  0.876422
+outcome_lc0_un_lc_pot_eff  796.0 -0.138171  0.519822 -1.625853 -0.497680 -0.134634  0.227731  1.383338
+outcome_lc1_un_lc_pot_eff  796.0  0.913409  1.125725 -1.688200  0.037110  0.750631  1.846344  3.707578
+outcome_lc2_un_lc_pot_eff  796.0  0.960190  1.166075 -1.754394  0.106831  0.809399  1.947226  3.523031
+
+----------------------------------------------------------------------------------------------------
+Prediction executed at: 2024-09-24 10:35:35.324385
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+Data preparation and stats II:                   0:00:09.907670
+Common support:                                  0:00:02.674153
+Local centering (recoding of Y):                 0:00:00.747129
+Weights:                                         0:01:06.509550
+ATEs:                                            0:00:00.624254
+GATEs:                                           0:00:00
+BGATEs:                                          0:00:00
+CBGATEs:                                         0:00:00
+IATEs:                                           0:00:10.315982
+Balancing test:                                  0:00:00
+
+Total time prediction:                           0:01:30.779240
